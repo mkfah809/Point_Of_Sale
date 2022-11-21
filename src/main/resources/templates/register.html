@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/css/register.css">
+<script src="https://kit.fontawesome.com/f09b2e2e32.js"
+	crossorigin="anonymous"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="header">
+			<h2>Create An Employee Account</h2>
+		</div>
+		<form class="form" id="form" action="/dashboard" method="POST">
+		
+			<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
+
+
+			<div class="form-control">
+				<label><b>Username</b></label> <input type="text"
+					placeholder="Enter username" id="username"
+					th:field="${employee.username}"> <i
+					class="fas fa-check-circle"></i> <i
+					class="fas fa-exclamation-cirlce"></i> <small>Error message</small>
+			</div>
+
+
+			<div class="form-control">
+				<label><b>Title</b></label> <select id="title"
+					th:field="${employee.title}">
+					<option th:value="none" selected>-- Select Role --</option>
+					<option th:value="Cashier">Cashier</option>
+					<option th:value="Driver">Driver</option>
+					<option th:value="Manager">Manager</option>
+					<option th:value="PizzaMaker">Pizza Maker</option>
+				</select> <i class="fas fa-check-circle"></i> <i
+					class="fas fa-exclamation-cirlce"></i> <small>Error message</small>
+			</div>
+
+			<div class="form-control">
+				<label><b>Password</b></label> <input type="password"
+					placeholder="Enter Password" id="password"
+					th:field="${employee.password}"> <i id="passwordEyeIcon"
+					class="fa-solid fa-eye"></i> <i class="fas fa-check-circle success"></i>
+				<i class="fas fa-exclamation-cirlce error"></i> <small>Error
+					message</small>
+			</div>
+
+			<div class="form-control">
+				<label><b> Confirm Password</b></label> <input type="password"
+					placeholder="Confirm Password" id="confirmPassword"> <i
+					id="confirmPasswordEyeIcon" class="fa-solid fa-eye"></i> <i
+					class="fas fa-check-circle"></i> <i
+					class="fas fa-exclamation-cirlce"></i> <small>Error message</small>
+			</div>
+			<Button type="submit" value="Submit">Submit</Button>
+		</form>
+		<a href='/dashboard'>
+			<button id="submitBtn">Dashboard</button>
+		</a>
+		<script type="text/javascript" src="/js/register.js"></script>
+	</div>
+
+</body>
+</html>

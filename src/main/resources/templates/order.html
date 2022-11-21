@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://kit.fontawesome.com/f09b2e2e32.js"
+	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/order.css">
+
+</head>
+<body>
+
+	<form method="post"
+		th:action="@{/order/here/{custId}(custId=${customer.custId})}">
+
+		<div>
+			<label><b>Payment Method</b></label> <select required id="type"
+				th:field="${order.type}">
+				<option th:value="none" selected>-- Select Method --</option>
+				<option th:value="Cash">Cash</option>
+				<option th:value="Visa">Visa</option>
+			</select>
+		</div>
+		<div>
+			<label><b>Order Type</b></label> <select required id="type"
+				th:field="${order.orderMethod}">
+				<option th:value="none" selected>-- Select Type --</option>
+				<option th:value="PickUp">PickUp</option>
+				<option th:value="Delivery">Delivery</option>
+				<option th:value="ToGo">ToGo</option>
+
+			</select>
+		</div>
+		<div>
+			<label>Comment:</label>
+			<textarea id="comment" th:field="${order.comment}"></textarea>
+		</div>
+
+		<Button>Save</Button>
+		<hr>
+	</form>
+	<hr>
+	Add Items
+	<form th:if="${order.orderId} != null" method="post"
+		th:action="@{/addItem/To/order/{orderId}/{custId}(orderId=${order.orderId},custId=${customer.custId})}">
+		<div class="conntainer">
+			<table class="_table">
+				<thead>
+					<tr>
+						<th>Size</th>
+						<th>Qty</th>
+						<th>HowCooked</th>
+						<th>Comment</th>
+					</tr>
+
+				</thead>
+				<tbody id="table_body">
+					<tr>
+						<td><select class="form_control" th:field="${pizza.size}"
+							name="size" id="size">
+								<option th:value="Lg">Lg</option>
+								<option th:value="Sm">Sm</option>
+						</select></td>
+						<td><select class="form_control" th:field="${pizza.qty}">
+								<option th:each="i : ${#numbers.sequence(1, 500)}"
+									th:value="${i}" th:text="${i}"></option>
+						</select></td>
+						<td><select class="form_control"
+							th:field="${pizza.HowCooked}" name="size" id="size">
+								<option th:value="Regular">Regular</option>
+								<option th:value="WellDone">WellDone</option>
+								<option th:value="LightCooked">LightCooked</option>
+
+						</select></td>
+
+						<td><input class="form_control" th:field=${pizza.comment}></td>
+						<td>
+							<div class="action_container">
+								<button class="success">
+									addItem <i class="fa-solid fa-plus"></i>
+								</button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</form>
+	<div th:each="pizza : ${pizzas}">
+		<form method="post"
+			th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
+			<span th:text="${pizza.pizzaId}"></span>____<span th:text="${price}"></span>
+			<div class="action_container">
+				<button class="danger">
+					<i class="fa-solid fa-x"></i>
+				</button>
+			</div>
+		</form>
+
+
+
+	</div>
+	<!-- 	<script type="text/javascript" src="/js/order.js"></script> -->
+</body>
+</html>

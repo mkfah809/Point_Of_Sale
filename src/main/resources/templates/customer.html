@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+</head>
+<body>
+	<h1>Customer Existing Information</h1>
+
+	<form class="form" id="form"
+		th:action="@{/customer/information/{custId}(custId=${customer.custId})}"
+		method="POST">
+		<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
+			th:value="${_csrf.token}" />
+		<hr>
+		<br>
+
+		<div class="input-group">
+			<label>ID: </label> <input class="rounded" type="text" id="id"
+				th:field="${customer.custId}">
+		</div>
+		<div class="input-group">
+			<label>Name: </label> <input class="rounded" type="text" id="name"
+				th:field="${customer.name}">
+		</div>
+		<div class="input-group">
+			<label>Phone# : </label> <input class="rounded" type="text"
+				id="phone" th:field="${customer.phone}">
+		</div>
+
+		<div class="input-group">
+			addressLine1: <input class="rounded" type="text" id="addressLine1"
+				th:field="${customer.address.addressLine1}" />
+		</div>
+		<div class="input-group">
+			addressLine2: <input class="rounded" type="text" id="addressLine2"
+				th:field="${customer.address.addressLine2}" />
+		</div>
+		<div class="input-group">
+			City: <input class="rounded" type="text" id="city"
+				th:field="${customer.address.city}" />
+		</div>
+		<div class="input-group">
+			Country: <input type="text" id="country"
+				th:field="${customer.address.country}" />
+		</div>
+		<div class="input-group">
+			Region: <input class="rounded" type="text" id="region"
+				th:field="${customer.address.region}" />
+		</div>
+		<div class="input-group">
+			ZipCode: <input class="rounded" type="text" id="zipCode"
+				th:field="${customer.address.zipCode}" />
+		</div>
+		<button value="submit" type="submit">
+			<i class="fas fa-search">Update</i>
+		</button>
+
+	</form>
+
+	<a th:href="@{/order/here/{custId}(custId=${customer.custId})}">
+		<Button id="nextBtn">Next</Button>
+	</a>
+	<script type="text/javascript" src="/js/customer.js"></script>
+
+</body>
+</html>

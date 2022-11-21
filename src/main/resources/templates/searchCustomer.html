@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http//thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+<link
+	href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+<link rel="stylesheet" href="/css/searchCustomer.css">
+
+</head>
+<body>
+	<h1>Enter Phone Number</h1>
+	<div class="container">
+		<div class="search">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="search-1">
+						<i class='bx bx-search-alt'></i>
+						<form th:if="${customer.custId} == null" method="POST"
+							action="/customer/information/new">
+							<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
+								th:value="${_csrf.token}" />
+							<div class="input-group">
+								<input th:field="${customer.phone}" type="search" id="phone"
+									placeholder="Enter Phone Number" aria-label="Search"
+									aria-describedby="search-addon" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/js/searchCustomer.js"></script>
+
+
+</body>
+</html>
