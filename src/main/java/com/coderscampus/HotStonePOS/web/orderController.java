@@ -1,5 +1,6 @@
 package com.coderscampus.HotStonePOS.web;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,26 +53,23 @@ public class orderController {
 	@GetMapping("/addItem/To/order/{orderId}/{custId}")
 	public String getAddItemsToExistingOrder(@PathVariable Long custId, @PathVariable Long orderId, ModelMap model,
 			Double price) {
-
-		model.put("order", orderService.findById(orderId));
+		Order foundOrder = orderService.findById(orderId);
+		price = 0.00;
+		model.put("order", foundOrder);
 		model.put("customer", custService.findById(custId));
 		model.put("pizza", new Pizza());
-		if (orderService.findById(orderId) != null) {
+
+		if (foundOrder != null) {
 			List<Pizza> findAllByOrder = pizzaService.findAllByOrder(orderId);
 			if (!findAllByOrder.isEmpty()) {
 				model.put("pizzas", findAllByOrder);
 				List<Double> priceForAllItems = new ArrayList<>();
 
-				for (Pizza pizza : findAllByOrder) {
-					price = pizza.getPrice();
-					priceForAllItems.add(price);
-					model.put("price", pizza.getPrice());
-				}
-				Double next = priceForAllItems.iterator().next();
+				Double setPriceToItem = pizzaService.setPriceToItem(price, findAllByOrder, priceForAllItems);
+				model.put("price", setPriceToItem);
 
-				for (Double priceForEachItem : priceForAllItems) {
-					Double finalPrice = priceForEachItem;
-				}
+				String setFinalPriceToOrder = orderService.setFinalPriceToOrder(price, priceForAllItems, foundOrder);
+				model.put("finalPrice", setFinalPriceToOrder);
 			}
 		}
 		return "order";

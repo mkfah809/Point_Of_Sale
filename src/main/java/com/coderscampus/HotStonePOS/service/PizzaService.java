@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import com.coderscampus.HotStonePOS.domain.Pizza;
 import com.coderscampus.HotStonePOS.repository.PizzaRepository;
@@ -18,9 +19,9 @@ public class PizzaService {
 		return pizzaRepo.save(pizza);
 
 	}
-	
-	public void delete(Long pizzaId){
-		 pizzaRepo.deleteById(pizzaId);
+
+	public void delete(Long pizzaId) {
+		pizzaRepo.deleteById(pizzaId);
 	}
 
 	public List<Pizza> findAll() {
@@ -42,14 +43,21 @@ public class PizzaService {
 		} else {
 			pizza.setPrice(08.99);
 		}
-		
-		
+
 		return pizzaPrice = pizza.getQty() * pizza.getPrice();
 	}
-	
+
 	public Iterable<Pizza> saveAll(List<Pizza> pizzas) {
 		return pizzaRepo.saveAll(pizzas);
 	}
-	
-	
+
+	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder,
+			List<Double> priceForAllItems) {
+		for (Pizza pizza : findAllByOrder) {
+			price = pizza.getPrice();
+			priceForAllItems.add(price);
+		}
+		return price;
+	}
+
 }
