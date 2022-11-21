@@ -40,7 +40,7 @@ public class PizzaService {
 		if (pizza.getSize().equalsIgnoreCase("LG")) {
 			pizza.setPrice(11.99);
 		} else {
-			pizza.setPrice(8.99);
+			pizza.setPrice(08.99);
 		}
 		
 		

@@ -90,7 +90,8 @@
 	<div th:each="pizza : ${pizzas}">
 		<form method="post"
 			th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
-			<span th:text="${pizza.pizzaId}"></span>____<span th:text="${price}"></span>
+<!-- 			<span th:text="${pizza.pizzaId}"></span> -->
+			<span th:text="${pizza.price}"></span>
 			<div class="action_container">
 				<button class="danger">
 					<i class="fa-solid fa-x"></i>

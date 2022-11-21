@@ -29,14 +29,12 @@ public class orderController {
 	PizzaService pizzaService;
 
 	@GetMapping("/order/here/{custId}")
-	public String getNewOrder(@PathVariable Long custId, @AuthenticationPrincipal Employee emp, ModelMap model,
-			Pizza pizza, Order order) {
+	public String getNewOrder(@PathVariable Long custId, @AuthenticationPrincipal Employee emp, ModelMap model) {
 		if (custId != null) {
 			model.put("pizza", new Pizza());
+			model.put("order", new Order());
 			model.put("customer", custService.findById(custId));
 			model.put("employee", emp);
-			model.put("order", order);
-			model.put("pizza", pizza);
 		}
 		return "order";
 	}
@@ -44,6 +42,7 @@ public class orderController {
 	@PostMapping("/order/here/{custId}")
 	public String postNewOrder(ArrayList<Order> orders, Order order, @AuthenticationPrincipal Employee emp,
 			Customer cust, Pizza pizza, ArrayList<Pizza> pizzas) {
+
 		Order savedOrder = orderService.save(order, emp, cust, orders);
 
 		return "redirect:/addItem/To/order/" + savedOrder.getOrderId() + "/" + cust.getCustId();
@@ -51,7 +50,8 @@ public class orderController {
 	}
 
 	@GetMapping("/addItem/To/order/{orderId}/{custId}")
-	public String getAddItemsToExistingOrder(@PathVariable Long custId, @PathVariable Long orderId, ModelMap model) {
+	public String getAddItemsToExistingOrder(@PathVariable Long custId, @PathVariable Long orderId, ModelMap model,
+			Double price) {
 
 		model.put("order", orderService.findById(orderId));
 		model.put("customer", custService.findById(custId));
@@ -60,10 +60,17 @@ public class orderController {
 			List<Pizza> findAllByOrder = pizzaService.findAllByOrder(orderId);
 			if (!findAllByOrder.isEmpty()) {
 				model.put("pizzas", findAllByOrder);
-				List<Double> prices = new ArrayList<>() ;
-				for(Pizza pizza : findAllByOrder) {
-					Double price = pizza.getPrice();
-					model.put("price", price);
+				List<Double> priceForAllItems = new ArrayList<>();
+
+				for (Pizza pizza : findAllByOrder) {
+					price = pizza.getPrice();
+					priceForAllItems.add(price);
+					model.put("price", pizza.getPrice());
+				}
+				Double next = priceForAllItems.iterator().next();
+
+				for (Double priceForEachItem : priceForAllItems) {
+					Double finalPrice = priceForEachItem;
 				}
 			}
 		}
@@ -81,8 +88,8 @@ public class orderController {
 		if (savedPizza.getPizzaId() != null) {
 			savedPizza.setPrice(pizzaService.setPriceToPizza(savedPizza, price));
 			pizzaService.save(savedPizza);
-
 		}
+
 		model.put("price", pizzaService.setPriceToPizza(savedPizza, price));
 		// orderService.save(foundOrderById, emp,
 		// custService.findById(custId),savedPizza.getOrders());
@@ -96,8 +103,7 @@ public class orderController {
 		List<Pizza> pizzas = orderService.findById(orderId).getPizzas();
 		Pizza pizzaRemoved = pizzas.remove(0);
 		System.out.println("Deleted Item# " + pizzaRemoved.getPizzaId());
-	    pizzaService.saveAll(pizzas);
-		
+		pizzaService.saveAll(pizzas);
 
 		return "redirect:/addItem/To/order/{orderId}/{custId}";
 	}

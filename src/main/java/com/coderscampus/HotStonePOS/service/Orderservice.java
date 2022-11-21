@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.ModelMap;
 
 import com.coderscampus.HotStonePOS.domain.Customer;
 import com.coderscampus.HotStonePOS.domain.Employee;
@@ -67,6 +68,14 @@ public class Orderservice {
 
 	public List<Order> findAll() {
 		return orderRepo.findAll();
+	}
+	
+	public void setPriceToItem(ModelMap model, List<Pizza> findAllByOrder) {
+		for(Pizza pizza : findAllByOrder) {
+			Double price = pizza.getPrice();
+			System.out.println(price);
+			model.put("price", pizza.getPrice());
+		}
 	}
 
 }
