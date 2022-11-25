@@ -1,31 +1,39 @@
-function create_tr(tableBody) {
-	tableBody = document.getElementById("table_body"),
-		first_tr = tableBody.firstElementChild
-	trClone = first_tr.cloneNode(true);
-
-	tableBody.append(trClone)
-	clean_first_tr(tableBody.firstElementChild);
-}
+var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
+var toppings = []
 
 
-function clean_first_tr(firstTr){
-
-	let children = firstTr.children;
-	children = Array.isArray(children) ? children : Object.values(children)
-	children.forEach(x => {
-		if (x !== firstTr.lastElementChild) {
-			x.firstElementChild.value = '';
-		}
-	});
-}
+// Use Array.forEach to add an event listener to each checkbox.
+checkboxes.forEach(function(checkbox) {
+	checkbox.addEventListener('change', function() {
+		toppings =
+			Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+				.filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+				.map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
 
 
-function remove_tr(This) {
-	if (This.closest('tbody').childElementCount == 1) {
-		alert("You don't have permission to delete this")
-	} else {
-		This.closest('tr').remove();
-	}
-}
+		toppings.map(function(i) {
+
+			let topping = {
+				'name': i
+			}
+
+			console.log(topping)
+
+			fetch("/addItem/To/order/{orderId}/{custId}/{pizzaId}", {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRF-TOKEN': document.getElementById('csrf').value
+				},
+				body: JSON.stringify(topping)
+			})
 
 
+		})
+
+
+
+
+
+	})
+});

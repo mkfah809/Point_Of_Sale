@@ -8,4 +8,5 @@ import com.coderscampus.HotStonePOS.domain.Topping;
 @Repository
 public interface ToppingRepo extends JpaRepository<Topping, Long> {
 
+	Topping findByName(String name);
 }

@@ -1,5 +1,7 @@
 package com.coderscampus.HotStonePOS.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +14,21 @@ public class ToppingService {
 	ToppingRepo toppingRepo;
 
 	 public Topping save(Topping topping) {
-		return toppingRepo.save(topping);
+		return toppingRepo.save(topping);	
+	}
+	 
+	 public List<Topping> findAllToppings(){
+		 return toppingRepo.findAll();
+	 }
+
+	 public Topping findByName(String name) {
+		 return toppingRepo.findByName(name);
+	 }
+
+	public Topping findById(Long toppingId) {
+		return toppingRepo.findById(toppingId).orElse(null);
 		
 	}
-
 
 
 }

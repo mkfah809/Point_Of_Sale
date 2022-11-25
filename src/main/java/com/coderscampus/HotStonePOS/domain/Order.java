@@ -24,7 +24,7 @@ public class Order {
 	private Double finalPrice;
 	private String orderMethod;
 	private String comment;
-	private Boolean isPaid;
+	private String status;
 	private Employee emp;
 	private Customer cust;
 	private List<Pizza> pizzas = new ArrayList<>();
@@ -45,8 +45,12 @@ public class Order {
 		this.finalPrice = finalPrice;
 	}
 
-	public Boolean getIsPaid() {
-		return isPaid;
+	public String getStatus() {
+		return status;
+	}
+	
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
@@ -59,9 +63,7 @@ public class Order {
 		this.pizzas = pizzas;
 	}
 
-	public void setIsPaid(Boolean isPaid) {
-		this.isPaid = isPaid;
-	}
+	
 
 	@ManyToOne
 	@JoinColumn(name = "cust_id")

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http//thymeleaf.org">
 <head>
+<style>
+</style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://kit.fontawesome.com/f09b2e2e32.js"
@@ -40,7 +42,8 @@
 		<hr>
 	</form>
 	<hr>
-	Add Items
+	<br>
+	<br>
 	<form th:if="${order.orderId} != null" method="post"
 		th:action="@{/addItem/To/order/{orderId}/{custId}(orderId=${order.orderId},custId=${customer.custId})}">
 		<div class="conntainer">
@@ -86,23 +89,49 @@
 			</table>
 		</div>
 
+		<br> <br>
 	</form>
-	<div th:each="pizza : ${pizzas}">
-		<form method="post"
-			th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
-<!-- 			<span th:text="${pizza.pizzaId}"></span> -->
-			<span th:text="${pizza.price}"></span>
-			<div class="action_container">
-				<button class="danger">
-					<i class="fa-solid fa-x"></i>
-				</button>
-			</div>
-		</form>
+	<table>
+		<tr>
+			<th>Qty</th>
+			<th>Topping</th>
+			<th>Size</th>
+			<th>Cooked</th>
+			<th>Comment</th>
+			<th>price</th>
+		</tr>
+		<div th:each="pizza : ${pizzas}">
+			<form method="post"
+				th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
+
+				<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
+					th:value="${_csrf.token}" />
+
+				<tr>
+					<td>x[[${pizza.qty}]]</td>
+					<td><div th:each="topping : ${toppings}">
+							<input name="settings" id="toppingName" type="checkbox"
+								th:text="${topping.name}" th:value="${topping.name}">
+						</div></td>
+					<td>[[${pizza.size}]]</td>
+					<td>[[${pizza.HowCooked}]]</td>
+					<td>[[${pizza.comment}]]</td>
+					<td>[[${pizza.price}]]</td>
+					<td><div class="action_container">
+							<button class="danger">
+								RemoveItem
+							</button>
+						</div></td>
+				</tr>
+	</table>
+	</form>
 
 
 	</div>
-	Final Price: <span>[[${finalPrice}]]</span>
-	
-	<!-- 	<script type="text/javascript" src="/js/order.js"></script> -->
+	Final Price:
+	<span>[[${finalPrice}]]</span>
+
+
+	<script type="text/javascript" src="/js/order.js"></script>
 </body>
 </html>

@@ -4,9 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.ModelMap;
 
+import com.coderscampus.HotStonePOS.domain.Order;
 import com.coderscampus.HotStonePOS.domain.Pizza;
+import com.coderscampus.HotStonePOS.domain.Topping;
 import com.coderscampus.HotStonePOS.repository.PizzaRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class PizzaService {
 	PizzaRepository pizzaRepo;
 
 	public Pizza save(Pizza pizza) {
+		if (pizza.getPizzaId() != null) {
+
+		}
 		return pizzaRepo.save(pizza);
 
 	}
@@ -51,13 +55,17 @@ public class PizzaService {
 		return pizzaRepo.saveAll(pizzas);
 	}
 
-	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder,
-			List<Double> priceForAllItems) {
+	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder, List<Double> priceForAllItems) {
 		for (Pizza pizza : findAllByOrder) {
 			price = pizza.getPrice();
 			priceForAllItems.add(price);
 		}
 		return price;
+	}
+
+	public void setToppingToPizza(Pizza savedPizza, Topping topping, List<Pizza> pizzas, List<Topping> toppings) {
+		pizzas.add(savedPizza);
+		
 	}
 
 }
