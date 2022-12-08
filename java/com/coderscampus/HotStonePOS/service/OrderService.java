@@ -15,7 +15,7 @@ import com.coderscampus.HotStonePOS.repository.OrderRepository;
 import com.coderscampus.HotStonePOS.repository.PizzaRepository;
 
 @Service
-public class Orderservice {
+public class OrderService {
 
 	@Autowired
 	OrderRepository orderRepo;

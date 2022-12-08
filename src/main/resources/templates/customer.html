@@ -45,14 +45,7 @@
 			City: <input class="rounded" type="text" id="city"
 				th:field="${customer.address.city}" />
 		</div>
-		<div class="input-group">
-			Country: <input type="text" id="country"
-				th:field="${customer.address.country}" />
-		</div>
-		<div class="input-group">
-			Region: <input class="rounded" type="text" id="region"
-				th:field="${customer.address.region}" />
-		</div>
+	
 		<div class="input-group">
 			ZipCode: <input class="rounded" type="text" id="zipCode"
 				th:field="${customer.address.zipCode}" />
@@ -63,9 +56,14 @@
 
 	</form>
 
-	<a th:href="@{/order/here/{custId}(custId=${customer.custId})}">
-		<Button id="nextBtn">Next</Button>
-	</a>
+	<div th:if="${customer.phone} != null">
+		<form th:action="@{/order/here/{custId}(custId=${customer.custId})}"
+			method="post">
+			<Button id="nextBtn">Next</Button>
+
+		</form>
+
+	</div>
 	<script type="text/javascript" src="/js/customer.js"></script>
 
 </body>
