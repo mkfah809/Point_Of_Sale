@@ -17,10 +17,9 @@ console.log("pizzaComment", pizzaComment.value)
 
 
 
-
+checkedValues.forEach(
+checkList.addEventListener('change', function() {
 	
-		checkbox.addEventListener('change', function() {
-			checkboxes.forEach(
 				toppings = Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
 					.filter(i => {
 						if(i.checked) {
@@ -30,7 +29,8 @@ console.log("pizzaComment", pizzaComment.value)
 						
 						}
 				})
-			)}
+})
+			)
 	
 
 //	pizzaBtn.addEventListener("click", () => {
