@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.HotStonePOS.domain.Customer;
 import com.coderscampus.HotStonePOS.domain.Employee;
@@ -56,10 +57,9 @@ public class orderController {
 				Pizza pizza = order.getPizzas().iterator().next();
 				model.put("pizza", pizza);
 				model.put("toppings", toppingService.findAllToppings());
-
+				model.put("topping", new Topping());
 			}
 			model.put("pizzas", pizzas);
-			model.put("topping", new Topping());
 		}
 
 		return "order";
@@ -88,30 +88,27 @@ public class orderController {
 			model.put("order", order);
 			model.put("customer", custService.findById(custId));
 			model.put("pizzas", order.getPizzas());
-
+			model.put("toppings", toppingService.findAllToppings());
 		}
 
 		return "order";
 	}
 
 	@PostMapping("/customer/{custId}/order/{orderId}/pizza/{pizzaId}")
+	@ResponseBody
 	String postTopping(@RequestBody Topping topping, ArrayList<Pizza> pizzas, ArrayList<Topping> toppings) {
-		System.out.println("XXXXX topping name is " + topping.getName());
-		
-		Topping foundTopping = toppingService.findByName(topping.getName());
-		System.out.println(foundTopping.getId());
-		Pizza foundPizza = pizzaService.findById(topping.getPizzas().get(0).getPizzaId());
-		System.out.println(foundPizza.getPizzaId());
 
+		Topping foundTopping = toppingService.findByName(topping.getName());
+		Pizza foundPizza = pizzaService.findById(topping.getPizzas().get(0).getPizzaId());
 		Order foundOrder = foundPizza.getOrders().get(0);
-		pizzas.add(foundPizza);
-		toppings.add(foundTopping);
-		foundTopping.setPizzas(pizzas);
-		foundPizza.setToppings(toppings);
-		List<Pizza> pizzas2 = foundTopping.getPizzas();
-		List<Topping> toppings2 = foundPizza.getToppings();
-		pizzaService.save(foundPizza); 
-		
+
+		System.out.println("XXXXX order id is " + foundOrder.getOrderId());
+		System.out.println("XXXXX pizza id is " + foundPizza.getPizzaId());
+		System.out.println("XXXXX topping id is " + foundTopping.getId());
+
+		pizzaService.setToppingToPizza(pizzas, toppings, foundTopping, foundPizza);
+		pizzaService.save(foundPizza);
+
 		return "redirect:/customer/{custId}/order/{orderId}/pizza/{pizzaId}";
 	}
 
@@ -123,7 +120,6 @@ public class orderController {
 		Pizza pizzaRemoved = pizzas.remove(0);
 		System.out.println("Deleted Item# " + pizzaRemoved.getPizzaId());
 		pizzaService.saveAll(pizzas);
-
 		return "redirect:/customer/{custId}/order/{orderId}";
 	}
 

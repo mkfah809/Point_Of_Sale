@@ -1,5 +1,6 @@
 package com.coderscampus.HotStonePOS.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,12 @@ public class PizzaService {
 //		return price;
 //	}
 
-	public void setToppingToPizza(Pizza savedPizza, Topping topping, List<Pizza> pizzas, List<Topping> toppings) {
-		pizzas.add(savedPizza);
+	public void setToppingToPizza(ArrayList<Pizza> pizzas, ArrayList<Topping> toppings, Topping foundTopping, Pizza foundPizza) {
+		
+		foundTopping.setPizzas(pizzas);
+		foundPizza.setToppings(toppings);
+		pizzas.add(foundPizza);
+		toppings.add(foundTopping);
 
 	}
 

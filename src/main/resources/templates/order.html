@@ -91,19 +91,17 @@
 			<td>
 
 				<div th:each="topping : ${toppings}">
+<!-- 					<form method="post" -->
+<!-- 						th:action="@{/customer/{custId}/order/{orderId}/pizza/{pizzaId}(custId=${customer.custId},orderId=${order.orderId},pizzaId=${pizza.pizzaId})}"> -->
 
-					<form method="post"
-						th:action="@{/customer/{custId}/order/{orderId}/pizza/{pizzaId}(custId=${customer.custId},orderId=${order.orderId},pizzaId=${pizza.pizzaId})}">
-						<input type="text" id="csrf" th:name="${_csrf.parameterName}"
-							th:value="${_csrf.token}" />
-						<input id="pizzaId" type="text" th:field="${pizza.pizzaId}">
-						<input id="toppingName" type="text" th:value="${topping.name}">
-						<Button id="toppingBtn" type="submit">add</Button>
 
-					</form>
-					<!-- 							<input  type="text"   id="pizzaId"     th:value="${pizza.pizzaId}">($[[${topping.price}]]) -->
-					<!-- 							<input  type="text"   id="toppingName" th:text	="${topping.id}" th:value="${topping.id}"> -->
-					<!-- 							<Button type="submit" id="toppingBtn"  value="submit">Add</Button> -->
+<!-- 						<input type="text" id="csrf" th:name="${_csrf.parameterName}" -->
+<!-- 							th:value="${_csrf.token}" />  -->
+							<input id="pizzaId" type="text" th:field="${pizza.pizzaId}"> 
+							<input id="toppingName"	type="text" th:value="${topping.name}">
+						<Button id="toppingBtn" value="submit" type="submit">add</Button>
+
+<!-- 					</form> -->
 				</div>
 
 			</td>
@@ -130,6 +128,6 @@
 	</table>
 
 
-	<script type="text/javascript" src="/js/order.js"></script>
+		<script type="text/javascript" src="/js/order.js"></script>
 </body>
 </html>

@@ -1,11 +1,8 @@
-const toppingBtn = document.getElementById("toppingBtn");
+var toppingBtn = document.querySelector("#toppingBtn");
 var orderId = document.getElementById("orderById")
 var pizzaId = document.getElementById("pizzaId")
 var toppingName = document.getElementById("toppingName")
-
-
 pizzaAddBtn.focus()
-
 
 
 toppingBtn.addEventListener('click', () => {
@@ -13,12 +10,16 @@ toppingBtn.addEventListener('click', () => {
 		'name': toppingName.value,
 		pizzas: [
 			{
-				'pizzaId': pizzaId.value
+				'pizzaId': pizzaId.value,
+				orders: [
+					{
+						'orderId': orderId.value
+					}
+				]
 			}
 		]
 	}
 
-	var csrf = document.getElementById('csrf')
 
 	console.log("topping object::: ", JSON.stringify(topping))
 
@@ -27,7 +28,7 @@ toppingBtn.addEventListener('click', () => {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			'X-CSRF-TOKEN':  csrf.value
+			'X-CSRF-TOKEN': document.getElementById('csrf').value
 		},
 		body: JSON.stringify(topping)
 	})

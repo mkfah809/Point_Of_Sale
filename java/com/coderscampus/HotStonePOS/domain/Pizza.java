@@ -28,7 +28,7 @@ public class Pizza {
 	private List<Order> orders = new ArrayList<>();
 	private List<Topping> toppings = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "pizza_has_toppings", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "topping_id"))
 	public List<Topping> getToppings() {
 		return toppings;
@@ -88,8 +88,7 @@ public class Pizza {
 		HowCooked = howCooked;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pizzas", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
-			})
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pizzas", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	public List<Order> getOrders() {
 		return orders;
 	}

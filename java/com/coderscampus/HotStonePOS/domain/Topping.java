@@ -19,7 +19,7 @@ public class Topping {
 	private Double price;
 	private List<Pizza> pizzas = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "toppings", cascade = { CascadeType.MERGE, CascadeType.PERSIST })
+	@ManyToMany(mappedBy = "toppings", cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
