@@ -39,10 +39,11 @@ public class OrderService {
 
 	public Order save(Order order, Employee emp, Customer cust, List<Order> orders) {
 		if (order.getOrderId() == null) {
+			order.setStatus("OPEN"); // status
 			setEmployeeToOrder(order, emp, orders);
 			setCustomerToOrder(order, cust, orders);
-		}else {
-			order.setStatus("OPEN"); //status
+		} else {
+
 		}
 		return orderRepo.save(order);
 	}
@@ -72,14 +73,14 @@ public class OrderService {
 		return orderRepo.findAll();
 	}
 
-	public String setFinalPriceToOrder(Double price, List<Double> priceForAllItems, Order order) {
-		for (int i = 0; i < priceForAllItems.size(); i++) {
-			price = price + (double) priceForAllItems.get(i);
-		}
-		System.out.println("Final price is = " + df.format(price));
-		order.setFinalPrice(price);
-		orderRepo.save(order);
-		return df.format(price);
-	}
+//	public String setFinalPriceToOrder(Double price, List<Double> priceForAllItems, Order order) {
+//		for (int i = 0; i < priceForAllItems.size(); i++) {
+//			price = price + (double) priceForAllItems.get(i);
+//		}
+//		System.out.println("Final price is = " + df.format(price));
+//		order.setFinalPrice(price);
+//		orderRepo.save(order);
+//		return df.format(price);
+//	}
 
 }

@@ -33,24 +33,21 @@ public class CustomerController {
 
 	@PostMapping("/customer/information/new")
 	public String postCustomer(Customer cust) throws Exception {
-		Customer foundByPhone = custService.findByPhone(cust.getPhone());
 
-		if (foundByPhone != null) {
-		} else {
-			custService.save(cust);
-			return "redirect:/customer/information/" + custService.findByPhone(cust.getPhone()).getCustId();
+		Customer foundCustomer = custService.findByPhone(cust.getPhone());
+		if (foundCustomer == null) {
 
+			foundCustomer = custService.save(cust);
 		}
 
-		return "redirect:/customer/information/" + foundByPhone.getCustId();
+		return "redirect:/customer/information/" + foundCustomer.getCustId();
 	}
 
 	@GetMapping("/customer/information/{custId}")
 	String getExistingCustomer(@PathVariable Long custId, ModelMap model) {
 		if (custId != null) {
-			Customer findById = custService.findById(custId);
-			model.put("customer", findById);
-			return "redirect:/customer/{custId}/order";
+			Customer foundCustomer = custService.findById(custId);
+			model.put("customer", foundCustomer);
 		}
 		return "customer";
 	}
@@ -60,14 +57,7 @@ public class CustomerController {
 		System.out.println("Updating Customer# " + cust.getCustId());
 		custService.setAddressToCustomer(cust, new Address());
 		custService.save(cust);
-		return "redirect:/customer/information/" + cust.getCustId();
+		return "redirect:/customer/{custId}/order";
 	}
-
-//	@PostMapping("/order/here/{custId}")
-//	String postNewOrder(Order order, @AuthenticationPrincipal Employee emp, @PathVariable Long custId) {
-//		Customer foundCustomer = custService.findById(custId);
-//		orderService.save(order, emp, foundCustomer, new ArrayList<>());
-//		return "redirect:/";
-//	}
 
 }

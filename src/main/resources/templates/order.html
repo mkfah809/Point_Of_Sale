@@ -14,65 +14,120 @@
 
 	<div class="conntainer">
 		<table class="_table">
-			<thead>
-				<tr>
-					<th>Size</th>
-					<th>Qty</th>
-					<th>Toppings</th>
-					<th>HowCooked</th>
-					<th>Comment</th>
-				</tr>
 
-			</thead>
 			<tbody id="table_body">
-				<tr>
-					<td><select class="form_control" th:field="${pizza.size}"
-						name="size" id="size">
-							<option th:value="Lg">Lg</option>
-							<option th:value="Sm">Sm</option>
-					</select></td>
-					<td><select id="qty" class="form_control"
-						th:field="${pizza.qty}">
-							<option th:each="i : ${#numbers.sequence(1, 500)}"
-								th:value="${i}" th:text="${i}"></option>
-					</select></td>
-					<td>
-						<div th:each="topping : ${toppings}">
-							<input name="settings" id="checkList" type="checkbox"
-								th:text="${topping.name}" th:value="${topping.id}">
-						</div>
-					</td>
-					<td><select class="form_control" th:field="${pizza.HowCooked}"
-						name="size" id="howCook">
-							<option th:value="Regular">Regular</option>
-							<option th:value="WellDone">WellDone</option>
-							<option th:value="LightCooked">LightCooked</option>
 
-					</select></td>
+				<form th:if="${order.orderId} != null" method="post"
+					th:action="@{/customer/{custId}/order/{orderId}(orderId=${order.orderId},custId=${customer.custId})}">
+					<div class="conntainer">
+						<table class="_table">
+							<thead>
+								<tr>
+									<th>Size</th>
+									<th>Qty</th>
+									<th>HowCooked</th>
+									<th>Comment</th>
+								</tr>
 
-					<td><input id="pizzaComment" class="form_control"
-						th:field=${pizza.comment}></td>
-					<td>
-						<div class="action_container">
+							</thead>
+							<tbody id="table_body">
+								<tr>
+									<td><select class="form_control" th:field="${pizza.size}"
+										name="size" id="size">
+											<option th:value="Lg">Lg</option>
+											<option th:value="Sm">Sm</option>
+									</select></td>
+									<td><select class="form_control" th:field="${pizza.qty}">
+											<option th:each="i : ${#numbers.sequence(1, 500)}"
+												th:value="${i}" th:text="${i}"></option>
+									</select></td>
+									<td><select class="form_control"
+										th:field="${pizza.HowCooked}" name="size" id="size">
+											<option th:value="Regular">Regular</option>
+											<option th:value="WellDone">WellDone</option>
+											<option th:value="LightCooked">LightCooked</option>
 
-							<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
-								th:value="${_csrf.token}" />
+									</select></td>
 
-							<button id="pizzaBtn" class="success">
-								addItem <i class="fa-solid fa-plus"></i>
-							</button>
-						</div>
-					</td>
-				</tr>
+									<td><input class="form_control" th:field=${pizza.comment}></td>
+									<td>
+										<div class="action_container">
+											<button id="pizzaAddBtn" class="success">
+												addItem <i class="fa-solid fa-plus"></i>
+											</button>
+										</div> <input type="hidden" th:value="${order.orderId}" id="orderId">
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<br> <br>
+				</form>
+
 			</tbody>
 		</table>
 	</div>
 
+	<input type="hidden" th:value="${order.orderId}" id="orderById">
 	<br>
-	<br>
-	<span th:text="${order.orderId}" th:value="${order.orderId}"
-		id="orderId"></span>
+	<hr>
 
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Qty</th>
+			<th>Size</th>
+			<th>Toppings</th>
+			<th>Cooked</th>
+			<th>Comment</th>
+			<th>price</th>
+		</tr>
+
+		<tr th:each="pizza : ${pizzas}">
+			<td>[[${pizza.pizzaId}]]</td>
+			<td>x[[${pizza.qty}]]</td>
+			<td>[[${pizza.size}]]</td>
+			<td>
+
+				<div th:each="topping : ${toppings}">
+
+					<form method="post"
+						th:action="@{/customer/{custId}/order/{orderId}/pizza/{pizzaId}(custId=${customer.custId},orderId=${order.orderId},pizzaId=${pizza.pizzaId})}">
+						<input type="text" id="csrf" th:name="${_csrf.parameterName}"
+							th:value="${_csrf.token}" />
+						<input id="pizzaId" type="text" th:field="${pizza.pizzaId}">
+						<input id="toppingName" type="text" th:value="${topping.name}">
+						<Button id="toppingBtn" type="submit">add</Button>
+
+					</form>
+					<!-- 							<input  type="text"   id="pizzaId"     th:value="${pizza.pizzaId}">($[[${topping.price}]]) -->
+					<!-- 							<input  type="text"   id="toppingName" th:text	="${topping.id}" th:value="${topping.id}"> -->
+					<!-- 							<Button type="submit" id="toppingBtn"  value="submit">Add</Button> -->
+				</div>
+
+			</td>
+
+
+
+			<td>[[${pizza.HowCooked}]]</td>
+			<td>[[${pizza.comment}]]</td>
+			<td>[[${pizza.price}]]</td>
+			<td>
+				<form method="post"
+					th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
+					<div class="action_container">
+						<button class="danger">RemoveItem</button>
+					</div>
+					<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
+						th:value="${_csrf.token}" /> <input type="hidden"
+						th:value="${order.orderId}" id="orderId">
+				</form>
+
+			</td>
+		</tr>
+
+	</table>
 
 
 	<script type="text/javascript" src="/js/order.js"></script>

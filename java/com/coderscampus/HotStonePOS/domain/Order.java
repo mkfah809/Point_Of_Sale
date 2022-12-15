@@ -48,12 +48,12 @@ public class Order {
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinTable(name = "order_has_pizzas", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "pizza_id"))
 	public List<Pizza> getPizzas() {
 		return pizzas;
@@ -62,8 +62,6 @@ public class Order {
 	public void setPizzas(List<Pizza> pizzas) {
 		this.pizzas = pizzas;
 	}
-
-	
 
 	@ManyToOne
 	@JoinColumn(name = "cust_id")

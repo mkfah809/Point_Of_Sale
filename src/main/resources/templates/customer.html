@@ -21,7 +21,7 @@
 		<br>
 
 		<div class="input-group">
-			<label>ID: </label> <input class="rounded" type="text" id="id"
+			<input class="rounded" type="hidden" id="id"
 				th:field="${customer.custId}">
 		</div>
 		<div class="input-group">
@@ -50,20 +50,13 @@
 			ZipCode: <input class="rounded" type="text" id="zipCode"
 				th:field="${customer.address.zipCode}" />
 		</div>
-		<button value="submit" type="submit">
-			<i class="fas fa-search">Update</i>
+		<button id="nextBtn" value="submit" type="submit">
+			<i class="fas fa-search">Next</i>
 		</button>
 
 	</form>
 
-	<div th:if="${customer.phone} != null">
-		<form th:action="@{/order/here/{custId}(custId=${customer.custId})}"
-			method="post">
-			<Button id="nextBtn">Next</Button>
-
-		</form>
-
-	</div>
+	
 	<script type="text/javascript" src="/js/customer.js"></script>
 
 </body>

@@ -89,7 +89,7 @@ public class Pizza {
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "pizzas", cascade = { CascadeType.MERGE, CascadeType.PERSIST,
-			CascadeType.REFRESH })
+			})
 	public List<Order> getOrders() {
 		return orders;
 	}

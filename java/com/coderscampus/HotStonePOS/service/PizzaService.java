@@ -17,9 +17,7 @@ public class PizzaService {
 	PizzaRepository pizzaRepo;
 
 	public Pizza save(Pizza pizza) {
-		if (pizza.getPizzaId() != null) {
 
-		}
 		return pizzaRepo.save(pizza);
 
 	}
@@ -41,32 +39,31 @@ public class PizzaService {
 
 	}
 
-	public Double setPriceToPizza(Pizza pizza, Double pizzaPrice) {
-		if (pizza.getSize().equalsIgnoreCase("LG")) {
-			pizza.setPrice(11.99);
-		} else {
-			pizza.setPrice(08.99);
-		}
-
-		return pizzaPrice = pizza.getQty() * pizza.getPrice();
-	}
+//	public Double setPriceToPizza(Pizza pizza, Double pizzaPrice) {
+//		if (pizza.getSize().equalsIgnoreCase("LG")) {
+//			pizza.setPrice(11.99);
+//		} else {
+//			pizza.setPrice(08.99);
+//		}
+//
+//		return pizzaPrice = pizza.getQty() * pizza.getPrice();
+//	}
 
 	public Iterable<Pizza> saveAll(List<Pizza> pizzas) {
 		return pizzaRepo.saveAll(pizzas);
 	}
 
-	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder, List<Double> priceForAllItems) {
-		for (Pizza pizza : findAllByOrder) {
-			price = pizza.getPrice();
-			priceForAllItems.add(price);
-		}
-		return price;
-	}
+//	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder, List<Double> priceForAllItems) {
+//		for (Pizza pizza : findAllByOrder) {
+//			price = pizza.getPrice();
+//			priceForAllItems.add(price);
+//		}
+//		return price;
+//	}
 
 	public void setToppingToPizza(Pizza savedPizza, Topping topping, List<Pizza> pizzas, List<Topping> toppings) {
 		pizzas.add(savedPizza);
 
 	}
 
-	
 }

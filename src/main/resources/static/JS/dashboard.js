@@ -1,2 +1,2 @@
-var pickupBtn = document.getElementById('pickupBtn');
-pickupBtn.focus()
+var orderHere = document.getElementById('orderHere');
+orderHere.focus()
