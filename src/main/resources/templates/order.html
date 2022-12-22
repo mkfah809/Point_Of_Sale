@@ -26,6 +26,7 @@
 								<tr>
 									<th>Size</th>
 									<th>Qty</th>
+									<th>Toppings</th>
 									<th>HowCooked</th>
 									<th>Comment</th>
 								</tr>
@@ -42,6 +43,14 @@
 											<option th:each="i : ${#numbers.sequence(1, 500)}"
 												th:value="${i}" th:text="${i}"></option>
 									</select></td>
+
+									<td>
+
+										<div th:each="topping : ${toppings}">
+											 <input th:text="${topping.name}" class="toppingName" type="checkbox" th:value="${topping.name}">
+										</div>
+
+									</td>
 									<td><select class="form_control"
 										th:field="${pizza.HowCooked}" name="size" id="size">
 											<option th:value="Regular">Regular</option>
@@ -94,11 +103,11 @@
 
 				<div th:each="topping : ${toppings}">
 					<input id="pizzaId" class="pizzaId" type="hidden"
-						th:value="${pizza.pizzaId}"> 
-						<input readonly id="toppingName" class="toppingName" type="text" th:value="${topping.name}">
+						th:value="${pizza.pizzaId}"> <input readonly
+						id="toppingName" class="toppingName" type="text"
+						th:value="${topping.name}">
 
-					<Button class="toppingBtn" type="submit">Add</Button>
-					<Button class="toppingDeleteBtn" type="submit">Delete</Button>
+
 				</div>
 
 
@@ -127,7 +136,8 @@
 
 	</table>
 
-	XXXX<input type="text" class="testTxt" id="testTxt">
+	XXXX
+	<input type="text" class="testTxt" id="testTxt">
 	<script type="text/javascript" src="/js/order.js"></script>
 </body>
 </html>

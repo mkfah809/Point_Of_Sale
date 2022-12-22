@@ -50,16 +50,17 @@ public class orderController {
 		if (order.getOrderId() != null) {
 			model.put("order", order);
 			model.put("customer", custService.findById(custId));
-			if (order.getPizzas().isEmpty()) {
-				model.put("pizza", new Pizza());
-			} else {
-				Pizza pizza = order.getPizzas().iterator().next();
-				model.put("pizza", pizza);
-				model.put("toppings", toppingService.findAllToppings());
-				model.put("topping", new Topping());
-			}
-			model.put("pizzas", pizzas);
+			List<Topping> findAllToppings = toppingService.findAllToppings();
+			model.put("toppings", findAllToppings);
 		}
+
+		if (order.getPizzas().isEmpty()) {
+			model.put("pizza", new Pizza());
+		} else {
+			Pizza pizza = order.getPizzas().iterator().next();
+			model.put("pizza", pizza);
+		}
+		model.put("pizzas", pizzas);
 
 		return "order";
 	}
@@ -90,7 +91,7 @@ public class orderController {
 		for (Topping topping : toppings) {
 			Double toppingPrice = topping.getPrice();
 			toppingsPrice.add(setPriceToPizza);
-			
+
 		}
 //		pizza.setPrice(PizzaFinalPrice);
 //		model.put("price", PizzaFinalPrice);
@@ -99,35 +100,6 @@ public class orderController {
 //		}
 
 		return "order";
-	}
-
-	@PostMapping("/customer/{custId}/order/{orderId}")
-	String postPizza(ModelMap model, @PathVariable Long orderId, Pizza pizza, ArrayList<Pizza> pizzas,
-			ArrayList<Order> orders, Double pizzaPrice) {
-		Pizza savedPizza = pizzaService.save(pizza);
-		Order order = orderService.findById(orderId);
-
-		if (order != null) {
-			orderService.setPizzaToOrder(savedPizza, order.getPizzas(), savedPizza.getOrders(), order);
-		}
-		return "redirect:/customer/" + order.getCust().getCustId() + "/order/" + order.getOrderId() + "/pizza/"
-				+ savedPizza.getPizzaId();
-	}
-
-	@PostMapping("/customer/{custId}/order/{orderId}/pizza/{pizzaId}")
-	String postTopping(@RequestBody Topping topping) {
-		Topping foundTopping = toppingService.findByName(topping.getName());
-		Pizza foundPizza = pizzaService.findById(topping.getPizzas().get(0).getPizzaId());
-		Order foundOrder = foundPizza.getOrders().get(0);
-		Customer foundCustomer = custService.findById(foundOrder.getCust().getCustId());
-
-		System.out.println("Order# " + foundOrder.getOrderId() + " has this pizza# " + foundPizza.getPizzaId()
-				+ " which has topping# " + foundTopping.getId());
-
-		pizzaService.setToppingToPizza(foundTopping, foundPizza);
-		pizzaService.save(foundPizza);
-		return "redirect:/customer/" + foundCustomer.getCustId() + "/order/" + foundOrder.getOrderId() + "/pizza/"
-				+ foundPizza.getPizzaId();
 	}
 
 	@PostMapping("/deleteItem/from/order/{pizzaId}/{orderId}/{custId}")
@@ -141,22 +113,4 @@ public class orderController {
 		return "redirect:/customer/{custId}/order/{orderId}";
 	}
 
-	@PostMapping("/delete-Topping/{pizzaId}/{toppingId}")
-	String deleteTopping(@RequestBody Topping topping) {
-		Topping foundTopping = toppingService.findByName(topping.getName());
-
-		Pizza pizza = pizzaService.findById(topping.getPizzas().get(0).getPizzaId());
-		List<Topping> toppings = pizza.getToppings();
-		toppings.remove(foundTopping);
-
-		System.out.print("Delete " + foundTopping.getName());
-		System.out.println(" from pizza# " + topping.getPizzas().get(0).getPizzaId());
-
-		toppingService.saveAll(toppings);
-		Order foundOrder = pizza.getOrders().get(0);
-		Customer foundCustomer = foundOrder.getCust();
-
-		return "redirect:/customer/" + foundCustomer.getCustId() + "/order/" + foundOrder.getOrderId() + "/pizza/"
-				+ pizza.getPizzaId();
-	}
 }
