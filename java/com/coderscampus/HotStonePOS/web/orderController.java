@@ -1,6 +1,7 @@
 package com.coderscampus.HotStonePOS.web;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +37,10 @@ public class orderController {
 	@GetMapping("/customer/{custId}/order")
 	String saveOrder(Order order, ModelMap model, @AuthenticationPrincipal Employee emp, @PathVariable Long custId) {
 		Customer customer = custService.findById(custId);
-		if (customer.getCustId() != null) {
-			order = orderService.save(new Order(), emp, customer, new ArrayList<>());
-		}
-		return "redirect:/customer/{custId}/order/" + order.getOrderId();
+		model.put("customer", customer);
+		Order savedOrder = orderService.save(order, emp, customer, new ArrayList<>());
+		model.put("order", savedOrder);
+		return "redirect:/customer/{custId}/order/" + savedOrder.getOrderId();
 	}
 
 	@GetMapping("/customer/{custId}/order/{orderId}")
@@ -65,41 +66,24 @@ public class orderController {
 		return "order";
 	}
 
-	@GetMapping("/customer/{custId}/order/{orderId}/pizza/{pizzaId}")
-	String getPizza(ModelMap model, @PathVariable Long orderId, @PathVariable Long custId, @PathVariable Long pizzaId) {
-		Order order = orderService.findById(orderId);
-		Pizza pizza = pizzaService.findById(pizzaId);
+	@PostMapping("/post-pizza/customer/{custId}/order/")
+	Boolean postPizza(@RequestBody Pizza pizza) {
 
-		Double pizzaPrice = null;
-		Double setPriceToPizza = pizzaService.setPriceToPizza(pizza, pizzaPrice);
-
-		if (orderId != null) {
-			model.put("pizza", pizza);
-			model.put("order", order);
-			model.put("customer", custService.findById(custId));
-			model.put("pizzas", order.getPizzas());
-			model.put("toppings", toppingService.findAllToppings());
-		}
-
-		// save pizza into Db
-		// get pizza price (qty+size)
-		// Iteration through all toppings within this pizza
+		Order foundOrder = orderService.findById(pizza.getOrders().get(0).getOrderId());
+		System.out.print("XXX Order# found is " + foundOrder.getOrderId());
+		System.out.println(" XXX size is " + pizza.getSize() + " XXX qty is " + pizza.getQty() + " XXX comment is "
+				+ pizza.getComment() + " XXX howCooked is " + pizza.getHowCooked() + " XXX price is "
+				+ pizza.getPrice());
 
 		List<Topping> toppings = pizza.getToppings();
-		ArrayList<Double> toppingsPrice = new ArrayList<>();
+        String string = toppings.get(0).toString();
+        System.out.println(string);
+        String[] split = string.split("\"");
+        String string2 = split.toString();
+       
+		
 
-		for (Topping topping : toppings) {
-			Double toppingPrice = topping.getPrice();
-			toppingsPrice.add(setPriceToPizza);
-
-		}
-//		pizza.setPrice(PizzaFinalPrice);
-//		model.put("price", PizzaFinalPrice);
-//		if (pizza.getPizzaId() != null) {
-//			model.put("price", pizza.getPrice());
-//		}
-
-		return "order";
+		return (pizza != null);
 	}
 
 	@PostMapping("/deleteItem/from/order/{pizzaId}/{orderId}/{custId}")

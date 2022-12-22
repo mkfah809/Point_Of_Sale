@@ -39,7 +39,8 @@
 											<option th:value="Lg">Lg</option>
 											<option th:value="Sm">Sm</option>
 									</select></td>
-									<td><select class="form_control" th:field="${pizza.qty}">
+									<td><select id="qty" class="form_control"
+										th:field="${pizza.qty}">
 											<option th:each="i : ${#numbers.sequence(1, 500)}"
 												th:value="${i}" th:text="${i}"></option>
 									</select></td>
@@ -47,19 +48,26 @@
 									<td>
 
 										<div th:each="topping : ${toppings}">
-											 <input th:text="${topping.name}" class="toppingName" type="checkbox" th:value="${topping.name}">
+<!-- 											<form method="post" -->
+<!-- 												th:action="@{post-pizza/customer/{custId}/order/{orderId}(custId=${customer.custId}, orderId=${order.orderId})}"> -->
+<!-- 												<input type="text" th:value="${order.orderId}" id="orderId">  -->
+													<input type="text" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+												<input th:text="${topping.name}" class="toppingName" type="checkbox" th:value="${topping.name}">
+													<input th:value="${topping.price}" class="toppingPrice">
+<!-- 											</form> -->
 										</div>
 
 									</td>
 									<td><select class="form_control"
-										th:field="${pizza.HowCooked}" name="size" id="size">
-											<option th:value="Regular">Regular</option>
+										th:field="${pizza.HowCooked}" name="size" id="howCook">
+											<option selected th:value="Regular">Regular</option>
 											<option th:value="WellDone">WellDone</option>
 											<option th:value="LightCooked">LightCooked</option>
 
 									</select></td>
 
-									<td><input class="form_control" th:field=${pizza.comment}></td>
+									<td><input id="comment" class="form_control"
+										th:field=${pizza.comment}></td>
 									<td>
 										<div class="action_container">
 											<button id="pizzaAddBtn" class="success">
@@ -119,7 +127,7 @@
 
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
-			<td id="pizzaPrice">[[${pizza.price}]]</td>
+			<td id="price">[[${pizza.price}]]</td>
 			<td>
 				<form method="post"
 					th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
@@ -136,8 +144,8 @@
 
 	</table>
 
-	XXXX
-	<input type="text" class="testTxt" id="testTxt">
+
+
 	<script type="text/javascript" src="/js/order.js"></script>
 </body>
 </html>

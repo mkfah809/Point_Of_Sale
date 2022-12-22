@@ -19,7 +19,12 @@ public class Topping {
 	private Double price;
 	private List<Pizza> pizzas = new ArrayList<>();
 
-	@ManyToMany(mappedBy = "toppings", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@Override
+	public String toString() {
+		return name ;
+	}
+
+	@ManyToMany(mappedBy = "toppings", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	public List<Pizza> getPizzas() {
 		return pizzas;
 	}
@@ -28,14 +33,11 @@ public class Topping {
 		this.pizzas = pizzas;
 	}
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
-
-	
 
 	public void setId(Long id) {
 		this.id = id;

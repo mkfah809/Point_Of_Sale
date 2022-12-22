@@ -39,6 +39,7 @@ public class OrderService {
 
 	public Order save(Order order, Employee emp, Customer cust, List<Order> orders) {
 		if (order.getOrderId() == null) {
+			
 			order.setStatus("OPEN"); // status
 			setEmployeeToOrder(order, emp, orders);
 			setCustomerToOrder(order, cust, orders);
