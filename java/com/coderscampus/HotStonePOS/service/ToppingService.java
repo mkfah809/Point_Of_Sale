@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.coderscampus.HotStonePOS.domain.Pizza;
 import com.coderscampus.HotStonePOS.domain.Topping;
 import com.coderscampus.HotStonePOS.repository.ToppingRepo;
 
@@ -28,6 +29,10 @@ public class ToppingService {
 	public Topping findById(Long toppingId) {
 		return toppingRepo.findById(toppingId).orElse(null);
 		
+	}
+
+	public Iterable<Topping> saveAll(List<Topping> toppings) {
+		return toppingRepo.saveAll(toppings);
 	}
 
 

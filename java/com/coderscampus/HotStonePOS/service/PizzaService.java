@@ -1,12 +1,10 @@
 package com.coderscampus.HotStonePOS.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.coderscampus.HotStonePOS.domain.Order;
 import com.coderscampus.HotStonePOS.domain.Pizza;
 import com.coderscampus.HotStonePOS.domain.Topping;
 import com.coderscampus.HotStonePOS.repository.PizzaRepository;
@@ -40,35 +38,21 @@ public class PizzaService {
 
 	}
 
-//	public Double setPriceToPizza(Pizza pizza, Double pizzaPrice) {
-//		if (pizza.getSize().equalsIgnoreCase("LG")) {
-//			pizza.setPrice(11.99);
-//		} else {
-//			pizza.setPrice(08.99);
-//		}
-//
-//		return pizzaPrice = pizza.getQty() * pizza.getPrice();
-//	}
+	public Double setPriceToPizza(Pizza pizza, Double pizzaPrice) {
+		if (pizza.getSize().equalsIgnoreCase("LG")) {
+			pizza.setPrice(11.99 * pizza.getQty());
+		} else {
+			pizza.setPrice(08.99 * pizza.getQty());
+		}
+		System.out.println(pizza.getQty() * pizza.getPrice());
+		return pizza.getPrice();
+	}
 
 	public Iterable<Pizza> saveAll(List<Pizza> pizzas) {
 		return pizzaRepo.saveAll(pizzas);
 	}
 
-//	public Double setPriceToItem(Double price, List<Pizza> findAllByOrder, List<Double> priceForAllItems) {
-//		for (Pizza pizza : findAllByOrder) {
-//			price = pizza.getPrice();
-//			priceForAllItems.add(price);
-//		}
-//		return price;
-//	}
-
-	public void setToppingToPizza(ArrayList<Pizza> pizzas, ArrayList<Topping> toppings, Topping foundTopping, Pizza foundPizza) {
-		
-		foundTopping.setPizzas(pizzas);
-		foundPizza.setToppings(toppings);
-		pizzas.add(foundPizza);
-		toppings.add(foundTopping);
-
+	public void setToppingToPizza(Topping foundTopping, Pizza foundPizza) {
+		foundPizza.getToppings().add(foundTopping);
 	}
-
 }

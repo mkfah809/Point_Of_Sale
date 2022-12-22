@@ -5,6 +5,7 @@
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <script src="https://kit.fontawesome.com/f09b2e2e32.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/order.css">
@@ -90,19 +91,18 @@
 			<td>[[${pizza.size}]]</td>
 			<td>
 
+
 				<div th:each="topping : ${toppings}">
-<!-- 					<form method="post" -->
-<!-- 						th:action="@{/customer/{custId}/order/{orderId}/pizza/{pizzaId}(custId=${customer.custId},orderId=${order.orderId},pizzaId=${pizza.pizzaId})}"> -->
+					<input id="pizzaId" class="pizzaId" type="hidden"
+						th:value="${pizza.pizzaId}"> 
+						<input readonly id="toppingName" class="toppingName" type="text" th:value="${topping.name}">
 
-
-<!-- 						<input type="text" id="csrf" th:name="${_csrf.parameterName}" -->
-<!-- 							th:value="${_csrf.token}" />  -->
-							<input id="pizzaId" type="text" th:field="${pizza.pizzaId}"> 
-							<input id="toppingName"	type="text" th:value="${topping.name}">
-						<Button id="toppingBtn" value="submit" type="submit">add</Button>
-
-<!-- 					</form> -->
+					<Button class="toppingBtn" type="submit">Add</Button>
+					<Button class="toppingDeleteBtn" type="submit">Delete</Button>
 				</div>
+
+
+
 
 			</td>
 
@@ -110,7 +110,7 @@
 
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
-			<td>[[${pizza.price}]]</td>
+			<td id="pizzaPrice">[[${pizza.price}]]</td>
 			<td>
 				<form method="post"
 					th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
@@ -127,7 +127,7 @@
 
 	</table>
 
-
-		<script type="text/javascript" src="/js/order.js"></script>
+	XXXX<input type="text" class="testTxt" id="testTxt">
+	<script type="text/javascript" src="/js/order.js"></script>
 </body>
 </html>
