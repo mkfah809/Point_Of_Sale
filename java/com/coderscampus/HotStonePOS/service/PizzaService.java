@@ -16,7 +16,12 @@ public class PizzaService {
 	PizzaRepository pizzaRepo;
 
 	public Pizza save(Pizza pizza) {
+		if (pizza.getPizzaId() != null) {
 
+		} else {
+			
+
+		}
 		return pizzaRepo.save(pizza);
 
 	}
@@ -38,21 +43,10 @@ public class PizzaService {
 
 	}
 
-	public Double setPriceToPizza(Pizza pizza, Double pizzaPrice) {
-		if (pizza.getSize().equalsIgnoreCase("LG")) {
-			pizza.setPrice(11.99 * pizza.getQty());
-		} else {
-			pizza.setPrice(08.99 * pizza.getQty());
-		}
-		System.out.println(pizza.getQty() * pizza.getPrice());
-		return pizza.getPrice();
-	}
 
 	public Iterable<Pizza> saveAll(List<Pizza> pizzas) {
 		return pizzaRepo.saveAll(pizzas);
 	}
 
-	public void setToppingToPizza(Topping foundTopping, Pizza foundPizza) {
-		foundPizza.getToppings().add(foundTopping);
-	}
+
 }

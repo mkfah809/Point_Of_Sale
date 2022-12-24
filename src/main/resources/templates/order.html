@@ -48,13 +48,15 @@
 									<td>
 
 										<div th:each="topping : ${toppings}">
-<!-- 											<form method="post" -->
-<!-- 												th:action="@{post-pizza/customer/{custId}/order/{orderId}(custId=${customer.custId}, orderId=${order.orderId})}"> -->
-<!-- 												<input type="text" th:value="${order.orderId}" id="orderId">  -->
-													<input type="text" id="csrf" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-												<input th:text="${topping.name}" class="toppingName" type="checkbox" th:value="${topping.name}">
-													<input th:value="${topping.price}" class="toppingPrice">
-<!-- 											</form> -->
+											<form method="post"
+												th:action="@{post-pizza/customer/{custId}/order/{orderId}(custId=${customer.custId}, orderId=${order.orderId})}">
+												<input type="hidden" th:value="${order.orderId}"
+													id="orderId"> <input type="hidden" id="csrf"
+													th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+												<input th:text="${topping.name}" class="toppingName"
+													type="checkbox" th:value="${topping.name}">
+												<!-- 													<input th:value="${topping.price}" class="toppingPrice"> -->
+											</form>
 										</div>
 
 									</td>
@@ -109,18 +111,9 @@
 			<td>
 
 
-				<div th:each="topping : ${toppings}">
-					<input id="pizzaId" class="pizzaId" type="hidden"
-						th:value="${pizza.pizzaId}"> <input readonly
-						id="toppingName" class="toppingName" type="text"
-						th:value="${topping.name}">
-
-
+				<div th:each="topping : ${addedToppings}">
+					<span th:text="${pizza.topping.name}"></span>
 				</div>
-
-
-
-
 			</td>
 
 

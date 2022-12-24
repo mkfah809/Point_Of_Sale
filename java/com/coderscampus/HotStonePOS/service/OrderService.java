@@ -39,12 +39,12 @@ public class OrderService {
 
 	public Order save(Order order, Employee emp, Customer cust, List<Order> orders) {
 		if (order.getOrderId() == null) {
-			
+
 			order.setStatus("OPEN"); // status
 			setEmployeeToOrder(order, emp, orders);
 			setCustomerToOrder(order, cust, orders);
 		} else {
-
+			Pizza pizza = new Pizza();
 		}
 		return orderRepo.save(order);
 	}
@@ -62,12 +62,18 @@ public class OrderService {
 
 	}
 
-	public void setPizzaToOrder(Pizza pizza, List<Pizza> pizzas, List<Order> orders, Order order) {
-		order.setPizzas(pizzas);
+	public void setPizzaToOrder(Pizza pizza, Order order) {
+		List<Pizza> pizzas = order.getPizzas();
+		List<Order> orders = pizza.getOrders();
+		pizza.getOrders().remove(0);
+
+		pizzas.add(pizza);
+		orders.add(order);
+		pizza.getOrders();
+		order.getPizzas();
+
 		pizza.setOrders(orders);
-		order.getPizzas().add(pizza);
-		pizza.getOrders().add(order);
-		pizzaRepo.save(pizza);
+		order.setPizzas(pizzas);
 	}
 
 	public List<Order> findAll() {

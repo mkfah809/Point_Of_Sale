@@ -21,7 +21,7 @@ public class Topping {
 
 	@Override
 	public String toString() {
-		return name ;
+		return name;
 	}
 
 	@ManyToMany(mappedBy = "toppings", cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
