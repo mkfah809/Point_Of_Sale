@@ -1,7 +1,6 @@
 package com.coderscampus.HotStonePOS.web;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,10 +45,12 @@ public class orderController {
 	}
 
 	@GetMapping("/customer/{custId}/order/{orderId}")
-	String getOrder(ModelMap model, @PathVariable Long orderId, @PathVariable Long custId) {
+	String getOrder(ModelMap model, @PathVariable Long orderId, @PathVariable Long custId, Pizza pizza) {
 		Order order = orderService.findById(orderId);
 		List<Pizza> pizzas = order.getPizzas();
-		Pizza pizza = pizzas.get(pizzas.size() - 1);
+		if (!pizzas.isEmpty()) {
+			pizza = pizzas.get(pizzas.size() - 1);
+		}
 
 		if (order.getOrderId() != null) {
 			model.put("customer", order.getCust());
@@ -57,13 +58,6 @@ public class orderController {
 			model.put("pizza", new Pizza());
 			model.put("pizzas", pizzas);
 			model.put("toppings", toppingService.findAllToppings());
-		}
-
-		if (!pizza.getToppings().isEmpty()) {
-			List<Topping> addedToppings = pizza.getToppings();
-			List<Topping> findAllByPizza = toppingService.findAllByPizza(pizza.getPizzaId());
-			model.put("addedToppings", findAllByPizza);
-
 		}
 
 		return "order";
@@ -106,6 +100,18 @@ public class orderController {
 		System.out.println("Deleted Item# " + pizzaRemoved.getPizzaId());
 		pizzaService.saveAll(pizzas);
 		return "redirect:/customer/{custId}/order/{orderId}";
+	}
+
+	@PostMapping("/order-price/customer/{custId}/order/{orderId}")
+	// when I price settle button
+	String postFinalPrice(@RequestBody Order order) {
+		Order foundOrder = orderService.findById(order.getOrderId());
+		foundOrder.setFinalPrice(order.getFinalPrice());
+		foundOrder.setStatus("CLOSE");
+		foundOrder.setOrderMethod(order.getOrderMethod());
+		foundOrder.setType(order.getType());
+		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());
+		return "redirect:/customer/" + foundOrder.getCust().getCustId() + "/order/" + foundOrder.getOrderId();
 	}
 
 }
