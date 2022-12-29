@@ -60,6 +60,11 @@ public class orderController {
 			model.put("toppings", toppingService.findAllToppings());
 		}
 
+		if (!pizza.getToppings().isEmpty()) {
+			Double finalPizzaPrice = pizza.getPrice() + (toppingService.getToppingPricePerPizza(pizza) * pizza.getQty());
+			pizza.setPrice(finalPizzaPrice);
+		}
+
 		return "order";
 	}
 
@@ -72,7 +77,7 @@ public class orderController {
 				Topping toppingFound = toppingService.findByName(topping);
 				pizza.getToppings().add(toppingFound);
 			}
-			// to make sure it clears the topping array we inserted the first time
+			// to make sure clearing the topping array we inserted the first time
 			pizza.getToppings().remove(0);
 
 		}
@@ -84,7 +89,6 @@ public class orderController {
 		orders.add(order);
 		pizza.setOrders(orders);
 		order.setPizzas(pizzas);
-
 		pizzaService.save(pizza);
 
 		return "redirect:/customer/" + order.getCust().getCustId() + "/order/" + order.getOrderId();
@@ -103,13 +107,8 @@ public class orderController {
 	}
 
 	@PostMapping("/order-price/customer/{custId}/order/{orderId}")
-	// when I price settle button
 	String postFinalPrice(@RequestBody Order order) {
 		Order foundOrder = orderService.findById(order.getOrderId());
-		foundOrder.setFinalPrice(order.getFinalPrice());
-		foundOrder.setStatus("CLOSE");
-		foundOrder.setOrderMethod(order.getOrderMethod());
-		foundOrder.setType(order.getType());
 		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());
 		return "redirect:/customer/" + foundOrder.getCust().getCustId() + "/order/" + foundOrder.getOrderId();
 	}

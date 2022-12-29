@@ -1,5 +1,6 @@
 package com.coderscampus.HotStonePOS.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,19 @@ public class ToppingService {
 	public List<Topping> findAllByPizza(Long pizzaId) {
 		return toppingRepo.findAllByPizza(pizzaId);
 
+	}
+
+	public Double getToppingPricePerPizza(Pizza pizza) {
+		ArrayList<Double> toppingPrice = new ArrayList<>();
+		for (Topping topping : pizza.getToppings()) {
+			toppingPrice.add(topping.getPrice());
+		}
+		Double totalToppingPrice = 0.0;
+		for (int i = 0; i < toppingPrice.size(); i++) {
+
+			totalToppingPrice = totalToppingPrice + (double) toppingPrice.get(i);
+		}
+		return totalToppingPrice;
 	}
 
 }

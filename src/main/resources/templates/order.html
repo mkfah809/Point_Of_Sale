@@ -14,21 +14,7 @@
 <body>
 
 
-	<div>
-		
-		<input type="radio" class="orderMethod" name="orderMethod" value="Cash">Cash
-		<input type="radio" class="orderMethod" name="orderMethod" value="Visa">Visa
 
-	</div>
-	<br>
-
-	<div>
-		<input type="radio" class="orderType"  name="orderType" value="PickUp">PickUp
-		<input type="radio" class="orderType"  name="orderType" value="Delivery">Delivery
-
-	</div>
-	<hr>
-	<br>
 
 	<div class="conntainer">
 		<table class="_table">
@@ -117,15 +103,16 @@
 			<th>Comment</th>
 			<th>price</th>
 		</tr>
-
+		
 		<tr th:each="pizza : ${pizzas}">
 			<td>[[${pizza.pizzaId}]]</td>
 			<td>x[[${pizza.qty}]]</td>
 			<td>[[${pizza.size}]]</td>
 			<td>[[${pizza.toppings}]]</td>
+<!-- 			<td id="emptyTopping"></td> -->
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
-			<td><span class="priceList" th:text=${pizza.price}></span></td>
+			<td class="priceList">[[${pizza.price}]]</td>
 			<td>
 				<form method="post"
 					th:action="@{/deleteItem/from/order/{pizzaId}/{orderId}/{custId}(pizzaId=${pizza.pizzaId},orderId=${order.orderId},custId =${customer.custId})}">
@@ -142,9 +129,34 @@
 
 	</table>
 
-	<span id="finalPrice"></span>
+	<hr>
+	<div>
+		Order Method: <input type="radio" class="orderMethod"
+			name="orderMethod" value="Cash">Cash <input type="radio"
+			class="orderMethod" name="orderMethod" value="Visa">Visa
+
+	</div>
+	<span id="orderMethod"></span>
+	<br>
+	
+	<div>
+		Order Type: <input type="radio" class="orderType" name="orderType"
+			value="PickUp">PickUp <input type="radio" class="orderType"
+			name="orderType" value="Delivery">Delivery
+	</div>
+	<span id="orderType"></span>
+	<br>	
 	<div class="action_container">
-		<button class="danger" id="settleBtn" type="Submit">Settle</button>
+		<button class="danger" id="settleBtn" type="Submit">Settle</button>	<span id="finalPrice"></span>
+		
+	</div>
+	<hr>
+	<br>
+
+	<div class="action_container">
+		<a href='/customer/information/new'>
+			<button class="success">DONE</button>
+		</a>
 	</div>
 	<br>
 	<script type="text/javascript" src="/js/order.js"></script>
