@@ -25,10 +25,12 @@ let toppings = []
 
 
 
-//if (toppingName.length === 0) {
-//	let errorText = "Ask your Boss to add toppings first"
-//	document.getElementById("emptyTopping").innerText = errorText.;
-//}
+if (toppingName.length === 0) {
+	let errorText = "Ask your Boss to add toppings first"
+	document.getElementById("emptyTopping").innerHTML = errorText;
+} else {
+	document.getElementById("emptyTopping").style.display = "none";
+}
 
 pizzaAddBtn.focus()
 
@@ -99,7 +101,7 @@ function setOrderPayMethod() {
 		if (orderMethod[i].checked) {
 			console.log(orderMethod[i].value)
 			orderMethod = orderMethod[i].value
-			document.getElementById("orderMethod").innerHTML = "Order Type: " + orderMethod;
+			document.getElementById("orderMethod").innerHTML = "Order Method: " + orderMethod;
 
 		}
 	}

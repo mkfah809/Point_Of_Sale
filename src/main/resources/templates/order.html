@@ -59,6 +59,10 @@
 													type="checkbox" th:value="${topping.name}">
 											</form>
 										</div>
+										<div>
+											<span  id="emptyTopping">error message</span>
+
+										</div>
 
 									</td>
 									<td><select class="form_control"
@@ -103,13 +107,13 @@
 			<th>Comment</th>
 			<th>price</th>
 		</tr>
-		
+
 		<tr th:each="pizza : ${pizzas}">
 			<td>[[${pizza.pizzaId}]]</td>
 			<td>x[[${pizza.qty}]]</td>
 			<td>[[${pizza.size}]]</td>
 			<td>[[${pizza.toppings}]]</td>
-<!-- 			<td id="emptyTopping"></td> -->
+			<td><span id="emptyTopping">error message</span></td>
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
 			<td class="priceList">[[${pizza.price}]]</td>
@@ -123,7 +127,6 @@
 						th:value="${_csrf.token}" /> <input type="hidden"
 						th:value="${order.orderId}" id="orderId">
 				</form>
-
 			</td>
 		</tr>
 
@@ -138,17 +141,18 @@
 	</div>
 	<span id="orderMethod"></span>
 	<br>
-	
+
 	<div>
 		Order Type: <input type="radio" class="orderType" name="orderType"
 			value="PickUp">PickUp <input type="radio" class="orderType"
 			name="orderType" value="Delivery">Delivery
 	</div>
 	<span id="orderType"></span>
-	<br>	
+	<br>
 	<div class="action_container">
-		<button class="danger" id="settleBtn" type="Submit">Settle</button>	<span id="finalPrice"></span>
-		
+		<button class="danger" id="settleBtn" type="Submit">Settle</button>
+		<span id="finalPrice"></span>
+
 	</div>
 	<hr>
 	<br>
