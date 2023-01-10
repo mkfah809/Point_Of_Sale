@@ -24,10 +24,11 @@ var toppingPrice = document.querySelectorAll('.toppingPrice')
 let toppings = []
 
 
-
+//Check if toppings are empty
 if (toppingName.length === 0) {
 	let errorText = "Ask your Boss to add toppings first"
 	document.getElementById("emptyTopping").innerHTML = errorText;
+	pizzaAddBtn.disabled = true;
 } else {
 	document.getElementById("emptyTopping").style.display = "none";
 }

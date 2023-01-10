@@ -15,7 +15,6 @@
 
 
 
-
 	<div class="conntainer">
 		<table class="_table">
 
@@ -58,11 +57,10 @@
 												<input th:text="${topping.name}" class="toppingName"
 													type="checkbox" th:value="${topping.name}">
 											</form>
+											
 										</div>
-										<div>
-											<span  id="emptyTopping">error message</span>
-
-										</div>
+										<span id="emptyTopping">error message</span>
+										
 
 									</td>
 									<td><select class="form_control"
@@ -113,7 +111,7 @@
 			<td>x[[${pizza.qty}]]</td>
 			<td>[[${pizza.size}]]</td>
 			<td>[[${pizza.toppings}]]</td>
-			<td><span id="emptyTopping">error message</span></td>
+			
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
 			<td class="priceList">[[${pizza.price}]]</td>

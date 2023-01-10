@@ -1,0 +1,25 @@
+Employee 
+----------------------
+If the employee has an administrative role, 
+so he can create a new employee, adding toppings, view list of employees,  delete employees,and update employees. 
+However, Each employee can keep track of their information. 
+
+
+
+Customer 
+--------------------------
+HotStone should assist personnel in keeping track of customer info. 
+For instance, if existing customer, it would pull all the information of this customer. 
+or a new customer, then the employee has to insert the information if needed. 
+
+
+Ordering
+---------
+When a customer calls on the phone, the employee must enter the 
+phone# to access the order page.
+Then, employee can select what the customer needs from the menu page.
+and it has the variety  to choose between Pickup/Delivery
+
+
+
+
