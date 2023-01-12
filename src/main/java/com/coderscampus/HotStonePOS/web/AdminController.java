@@ -1,5 +1,7 @@
 package com.coderscampus.HotStonePOS.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -68,6 +70,10 @@ public class AdminController {
 
 	@GetMapping("/dashoard/employees")
 	public String getListEmployees(ModelMap model) {
+		List<Employee> findAllEmployees = adminService.findAll();
+		if(findAllEmployees.size() == 1) {
+			//do smthn
+		}
 		model.put("employees", adminService.findAll());
 		return "employees";
 
@@ -77,7 +83,7 @@ public class AdminController {
 	public String deleteExistingEmployee(@PathVariable Long empId) {
 		System.out.println("Deleting user# " + empId);
 		adminService.delete(empId);
-		return "redirect:/dashboard";
+		return "redirect:/dashoard/employees";
 	}
 
 	@GetMapping("/dashboard/toppings")

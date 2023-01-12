@@ -5,6 +5,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.coderscampus.HotStonePOS.domain.Customer;
 import com.coderscampus.HotStonePOS.domain.Employee;
 import com.coderscampus.HotStonePOS.service.AdminService;
 
@@ -19,6 +21,7 @@ public class DashboardController {
 		try {
 			model.put("employee", foundById);
 			model.put("access", emp.getAuthorities().iterator().next());
+
 
 		} catch (Exception e) {
 

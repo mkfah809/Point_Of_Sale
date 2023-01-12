@@ -28,23 +28,29 @@
 
 	<div class="card text-center">
 		<div class="card-header">
+
 			<ul class="nav nav-pills card-header-pills">
+
 				<li class="nav-item">
-					<form action="/logout" method="POST">
-						<input class="btn btn-primary" type="hidden"
-							th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-						<button class="btn btn-primary" type="submit">Logout</button>
-					</form>
+					<div id="nav-right">
+						<form id="nav-right" action="/logout" method="POST">
+							<input class="btn btn-primary" type="hidden"
+								th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+							<button class="btn btn-primary" type="submit">Logout</button>
+
+						</form>
+					</div>
 				</li>
-				<li th:if="${access.authority} == 'ROLE_ADMIN'" class="nav-item">
-				<a class="btn btn-secondary" th:href="@{/register/new/employee}">Register</a></li>
 				<li th:if="${access.authority} == 'ROLE_ADMIN'" class="nav-item"><a
-					class="btn btn-primary" th:href="@{/dashoard/employees}">List
-						Employees</a></li>
+					class="btn btn-primary" th:href="@{/dashoard/employees}">
+						Employee</a></li>
 				<li><a class="btn btn-secondary"
 					th:href="@{/dashboard/about-me/{empId}(empId=${employee.id})}">Update</a></li>
 				<li th:if="${access.authority} == 'ROLE_ADMIN'" class="nav-item"><a
-					class="btn btn-primary" th:href="@{/dashboard/toppings}">Add Toppings</a></li>	
+					class="btn btn-primary" th:href="@{/dashboard/toppings}">Insert Your Own
+						Toppings</a></li>
+
 			</ul>
 		</div>
 
@@ -54,8 +60,9 @@
 			<h5 class="card-title">Remember Special Treatment</h5>
 			<p class="card-text">HotStone for any natural additional content.</p>
 
-			 
-				<a id="orderHere" href="/customer/information/new" class="btn btn-primary">Order here</a>
+
+			<a id="orderHere" href="/customer/information/new"
+				class="btn btn-primary">Order here</a>
 		</div>
 	</div>
 	<p id="btn-secondary">Logged In: [[${employee.username}]]</p>

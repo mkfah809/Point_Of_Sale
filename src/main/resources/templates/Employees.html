@@ -24,35 +24,43 @@
 	<a href='/dashboard'>
 		<button>Dashboard</button>
 	</a>
-
+	<a href='/register/new/employee'>
+		<button>Register New Employee</button>
+	</a>
 	<table class="table table-striped">
 
 		<tr>
-			<th>ID</th>
+			<th>Update</th>
 			<th>username</th>
 
 			<th>Delete Actions</th>
 		</tr>
-	
+
 
 		<tr th:each="employee : ${employees}">
 
 			<td><a
 				th:href="@{/dashboard/about-me/{empId}(empId=${employee.id})}">[[${employee.id}]]</a></td>
 			<td><div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="basic-addon1">@</span>
-					</div>
-					<input type="text" class="form-control" th:value="${employee.username}"
-						aria-label="Username" aria-describedby="basic-addon1">
+
+					<input readonly type="text" class="form-control"
+						th:value="${employee.username}" aria-label="Username"
+						aria-describedby="basic-addon1">
 				</div></td>
 			<td>
 
 				<form
 					th:action="@{/dashoard/employees/delete/{empId}(empId=${employee.id})}"
 					method="post">
-					<input type="hidden" th:value="${employee.id}" /> <input
-						type="submit" class="btn btn-primary" value="Delete" />
+					<input type="hidden" th:value="${employee.id}" />
+
+					<div th:if="${employee.id == 1}">
+						<input disabled type="submit" class="btn btn-primary"
+							value="Delete" />
+					</div>
+					<div th:if="${employee.id != 1}">
+						<input type="submit" class="btn btn-primary" value="Delete" />
+					</div>
 				</form>
 			</td>
 		</tr>
