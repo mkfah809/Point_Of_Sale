@@ -28,8 +28,8 @@ let toppings = []
 if (toppingName.length === 0) {
 	let errorText = "Ask your Boss to add toppings"
 	document.getElementById("emptyTopping").innerHTML = errorText;
-	pizzaAddBtn.disabled=true;
-}else {
+	pizzaAddBtn.disabled = true;
+} else {
 	document.getElementById("emptyTopping").style.display = "none"
 }
 
@@ -66,11 +66,15 @@ document.getElementById("finalPrice").innerHTML = "Total Price: " + totalPriceTe
 
 
 settleBtn.addEventListener('click', () => {
+	let orderMethodisChecked = setOrderPayMethod()
+	let orderTypeIsChecked = setOrderType()
 
-	setOrderPayMethod()
-	setOrderType()
-	postUpdateOrder()
-	document.getElementById("finalPrice").innerHTML = "Total Price: " + 0.0;
+	if (orderMethodisChecked == true || orderTypeIsChecked == true) {
+		postUpdateOrder()
+		document.getElementById("finalPrice").innerHTML = "Total Price: " + 0.0;
+	} else {
+		document.getElementById("finalPrice").innerHTML = "Choose Order Type/ Method"
+	}
 
 
 })
@@ -103,8 +107,8 @@ function setOrderPayMethod() {
 			console.log(orderMethod[i].value)
 			orderMethod = orderMethod[i].value
 			document.getElementById("orderMethod").innerHTML = "Order Type: " + orderMethod;
-
-		}
+			return true;
+		} 
 	}
 }
 
@@ -114,6 +118,7 @@ function setOrderType() {
 			console.log(orderType[i].value)
 			orderType = orderType[i].value
 			document.getElementById("orderType").innerHTML = "Order Type: " + orderType;
+			return true;
 		}
 	}
 }

@@ -27,7 +27,16 @@ public class Order {
 	private String status;
 	private Employee emp;
 	private Customer cust;
+	private String confirmationNumber;
 	private List<Pizza> pizzas = new ArrayList<>();
+	
+	public String getConfirmationNumber() {
+		return confirmationNumber;
+	}
+
+	public void setConfirmationNumber(String confirmationNumber) {
+		this.confirmationNumber = confirmationNumber;
+	}
 
 	public String getOrderMethod() {
 		return orderMethod;

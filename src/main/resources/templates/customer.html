@@ -32,6 +32,10 @@
 			<label>Phone# : </label> <input class="rounded" type="text"
 				id="phone" th:field="${customer.phone}">
 		</div>
+		<div class="input-group">
+			<label>Email : </label> <input class="rounded" type="text" id="email"
+				th:field="${customer.email}">
+		</div>
 
 		<div class="input-group">
 			addressLine1: <input class="rounded" type="text" id="addressLine1"
@@ -45,7 +49,7 @@
 			City: <input class="rounded" type="text" id="city"
 				th:field="${customer.address.city}" />
 		</div>
-	
+
 		<div class="input-group">
 			ZipCode: <input class="rounded" type="text" id="zipCode"
 				th:field="${customer.address.zipCode}" />
@@ -56,7 +60,7 @@
 
 	</form>
 
-	
+
 	<script type="text/javascript" src="/js/customer.js"></script>
 
 </body>

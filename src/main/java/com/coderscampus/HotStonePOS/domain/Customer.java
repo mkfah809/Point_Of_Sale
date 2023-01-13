@@ -5,19 +5,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-
-import org.springframework.lang.NonNull;
-
-import net.bytebuddy.utility.nullability.NeverNull;
 
 @Entity(name = "customers")
 public class Customer {
@@ -26,7 +18,16 @@ public class Customer {
 	private String name;
 	private String phone;
 	private Address address;
+	private String email;
 	private List<Order> orders = new ArrayList<>();
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getPhone() {
 		return phone;

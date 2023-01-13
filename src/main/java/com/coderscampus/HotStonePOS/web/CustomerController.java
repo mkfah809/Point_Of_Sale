@@ -3,6 +3,7 @@ package com.coderscampus.HotStonePOS.web;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,5 +60,7 @@ public class CustomerController {
 		custService.save(cust);
 		return "redirect:/customer/{custId}/order";
 	}
+	
+	
 
 }

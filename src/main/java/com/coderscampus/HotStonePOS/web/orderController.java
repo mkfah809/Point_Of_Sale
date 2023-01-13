@@ -109,8 +109,16 @@ public class orderController {
 	@PostMapping("/order-price/customer/{custId}/order/{orderId}")
 	String postFinalPrice(@RequestBody Order order) {
 		Order foundOrder = orderService.findById(order.getOrderId());
+		String confirmationNumber = custService.getConfirmationNumber();
+		foundOrder.setConfirmationNumber(confirmationNumber);
+		foundOrder.setFinalPrice(order.getFinalPrice());
+		foundOrder.setOrderMethod(order.getOrderMethod());
+		foundOrder.setType(order.getType());
 		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());
-		return "redirect:/customer/" + foundOrder.getCust().getCustId() + "/order/" + foundOrder.getOrderId();
+		
+		custService.sendMail(foundOrder.getCust(), foundOrder);
+		
+		return "redirect:/customer/information/new";
 	}
 
 }
