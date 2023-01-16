@@ -46,7 +46,7 @@
 					class="btn btn-primary" th:href="@{/dashoard/employees}">
 						Employee</a></li>
 				<li><a class="btn btn-secondary"
-					th:href="@{/dashboard/about-me/{empId}(empId=${employee.id})}">Update</a></li>
+					th:href="@{/dashboard/about-me/{empId}(empId=${employee.id})}">Profile</a></li>
 				<li th:if="${access.authority} == 'ROLE_ADMIN'" class="nav-item"><a
 					class="btn btn-primary" th:href="@{/dashboard/toppings}">Insert Your Own
 						Toppings</a></li>

@@ -6,7 +6,7 @@ var confirmPassword = document.getElementById('confirmPassword');
 var eyeIcons = document.querySelectorAll('.fa-eye')
 
 
-
+document.getElementById("success").style.display = "none"
 async function createEmployee() {
 	form.addEventListener('submit', (e) => {
 		e.preventDefault();
@@ -119,18 +119,14 @@ function isPassword(password) {
 }
 
 
-async function loading() {
-	window.location.reload();
-
-}
 function fireRequest() {
-	
+
 	let emp = {
 		username: username.value,
 		title: title.value,
 		password: password.value
 	}
-	
+
 	fetch("/register/new/employee", {
 		method: 'POST',
 		headers: {
@@ -142,10 +138,13 @@ function fireRequest() {
 		.then((response) => response.json())
 		.then((data) => {
 			if (data === true) {
+				// if emp not new
 				setErrorFor(username, 'username already exists')
 				username.focus()
 				username.select()
-				
+			} else {
+				document.getElementById("success").style.display = "block"
+				document.getElementById("success").innerHTML = "Congratulations, New Account has been successfully created."
 			}
 
 		})

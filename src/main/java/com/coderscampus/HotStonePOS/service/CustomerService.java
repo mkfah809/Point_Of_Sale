@@ -60,22 +60,18 @@ public class CustomerService {
 	}
 
 	public String getConfirmationNumber() {
-		String confirmationNumber =  new Random().ints(48, 123)
-				.filter(num -> (num < 58 || num > 64) && (num < 91 || num > 96))
-				.limit(15)
-				.mapToObj(c -> (char) c).collect(StringBuffer::new, StringBuffer::append, StringBuffer::append)
-				.toString();
+		String confirmationNumber = new Random().ints(48, 123)
+				.filter(num -> (num < 58 || num > 64) && (num < 91 || num > 96)).limit(15).mapToObj(c -> (char) c)
+				.collect(StringBuffer::new, StringBuffer::append, StringBuffer::append).toString();
 		return confirmationNumber;
 
 	}
 
 	public void sendMail(Customer customer, Order order) {
 		final String emailToRecipient = customer.getEmail();
-		 final String emailSubject = "HotStone Pizzeria";
-		final String emailMessage = "Thank you for Choosing HotStone Restaurant\n"
-				+ "Your paying in " + order.getOrderMethod()
-				+ "\nYour Total is: " + order.getFinalPrice()
-				+ "\nYour confirmation# is: " + order.getConfirmationNumber();
+		final String emailSubject = "Thank you for Choosing XYZ Pizzeria";
+		final String emailMessage = "Thank you for Choosing HotStone POS" + "\r\n Your Total is: " + order.getFinalPrice()
+				+ "\r\n Your confirmation# is: " + order.getConfirmationNumber();
 		mailSender.send(new MimeMessagePreparator() {
 
 			@Override

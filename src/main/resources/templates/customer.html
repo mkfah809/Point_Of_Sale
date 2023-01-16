@@ -3,63 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="/css/customer.css">
+
 
 </head>
 <body>
-	<h1>Customer Existing Information</h1>
+	<div class="center">
+		<h1>Customer Information</h1>
 
-	<form class="form" id="form"
-		th:action="@{/customer/information/{custId}(custId=${customer.custId})}"
-		method="POST">
-		<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
-			th:value="${_csrf.token}" />
-		<hr>
-		<br>
+		<form class="form" id="form"
+			th:action="@{/customer/information/{custId}(custId=${customer.custId})}"
+			method="POST">
+			<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" />
 
-		<div class="input-group">
-			<input class="rounded" type="hidden" id="id"
-				th:field="${customer.custId}">
-		</div>
-		<div class="input-group">
-			<label>Name: </label> <input class="rounded" type="text" id="name"
-				th:field="${customer.name}">
-		</div>
-		<div class="input-group">
-			<label>Phone# : </label> <input class="rounded" type="text"
-				id="phone" th:field="${customer.phone}">
-		</div>
-		<div class="input-group">
-			<label>Email : </label> <input class="rounded" type="text" id="email"
-				th:field="${customer.email}">
-		</div>
+			<div>
+				<input class="rounded" type="hidden" id="id"
+					th:field="${customer.custId}">
+			</div>
+			<div class="txt_field">
+				 <input placeholder="Name*" required class="rounded" type="text"
+					id="name" th:field="${customer.name}">
+			</div>
+			<div class="txt_field">
+				 <input required class="rounded" type="text"
+					id="phone" th:field="${customer.phone}">
+			</div>
+			<div class="txt_field">
+				 <input placeholder="Email*" required class="rounded" type="text"
+					id="email" th:field="${customer.email}">
+			</div>
 
-		<div class="input-group">
-			addressLine1: <input class="rounded" type="text" id="addressLine1"
-				th:field="${customer.address.addressLine1}" />
-		</div>
-		<div class="input-group">
-			addressLine2: <input class="rounded" type="text" id="addressLine2"
-				th:field="${customer.address.addressLine2}" />
-		</div>
-		<div class="input-group">
-			City: <input class="rounded" type="text" id="city"
-				th:field="${customer.address.city}" />
-		</div>
+			<div class="txt_field">
+				<input placeholder="Address*" required class="rounded" type="text"
+					id="addressLine1" th:field="${customer.address.addressLine1}" />
+			</div>
+			<div class="txt_field">
+				 <input placeholder="Apt.,Building ... *"class="rounded" type="text" id="addressLine2"
+					th:field="${customer.address.addressLine2}" />
+			</div>
+			<div class="txt_field">
+			 <input required placeholder="City*"class="rounded" type="text" id="city"
+					th:field="${customer.address.city}" />
+			</div>
 
-		<div class="input-group">
-			ZipCode: <input class="rounded" type="text" id="zipCode"
-				th:field="${customer.address.zipCode}" />
-		</div>
-		<button id="nextBtn" value="submit" type="submit">
-			<i class="fas fa-search">Next</i>
-		</button>
+			<div class="txt_field">
+			 <input placeholder="Zipcode*" required class="rounded" type="text" id="zipCode"
+					th:field="${customer.address.zipCode}" />
+			</div>
+			<div class="btn">
+				<button id="nextBtn" value="submit" type="submit">
+					<i class="fas fa-search">Next</i>
+				</button>
+			</div>
 
-	</form>
-
+		</form>
+	</div>
 
 	<script type="text/javascript" src="/js/customer.js"></script>
 

@@ -13,8 +13,9 @@
 		<div class="header">
 			<h2>Create An Employee Account</h2>
 		</div>
+
 		<form class="form" id="form" action="/dashboard" method="POST">
-		
+
 			<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 
@@ -57,12 +58,12 @@
 					class="fas fa-exclamation-cirlce"></i> <small>Error message</small>
 			</div>
 			<Button type="submit" value="Submit">Submit</Button>
+			<a href='/dashoard/employees'> <span id="success"></Span></a>
 		</form>
-		<a href='/dashboard'>
-			<button id="submitBtn">Dashboard</button>
-		</a>
+
 		<script type="text/javascript" src="/js/register.js"></script>
 	</div>
-
+	
+	</a>
 </body>
 </html>

@@ -71,9 +71,6 @@ public class AdminController {
 	@GetMapping("/dashoard/employees")
 	public String getListEmployees(ModelMap model) {
 		List<Employee> findAllEmployees = adminService.findAll();
-		if(findAllEmployees.size() == 1) {
-			//do smthn
-		}
 		model.put("employees", adminService.findAll());
 		return "employees";
 

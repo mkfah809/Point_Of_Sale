@@ -1,0 +1,14 @@
+Author: Mina K Fahmy
+Date: 01/12/2023
+Title: HotStonePOS Web Application
+Technologies: Spring MVC, Spring Security, MySQL, Hibernate, Thymeleaf, JavaScript, Java, HTML, CSS
+About:
+
+This Point Of Sale Application is a third party application, it is built for employees to be able to serve customers
+by built for helping employee to run a pizza store.
+so they can order pizza, and search about customers by their phone number.
+
+as well as, it is developed with scalibiltiy and flexbility 
+to let every store runs their own toppings/special pizzas ..etc
+
+
