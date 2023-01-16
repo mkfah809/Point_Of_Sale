@@ -44,9 +44,8 @@ pizzaAddBtn.addEventListener("click", () => {
 	} else {
 		pizzaSizePrice = 8.99
 	}
-
-
 	price = pizzaSizePrice * parseInt(pizzaQty.value);
+
 	getCheckedToppings()
 	setPizza()
 	sessionIsEmpty()
@@ -69,9 +68,11 @@ settleBtn.addEventListener('click', () => {
 	let orderMethodisChecked = setOrderPayMethod()
 	let orderTypeIsChecked = setOrderType()
 
-	if (orderMethodisChecked == true || orderTypeIsChecked == true) {
+	if (orderMethodisChecked == true & orderTypeIsChecked == true) {
 		postUpdateOrder()
 		document.getElementById("finalPrice").innerHTML = "Total Price: " + 0.0;
+		document.getElementById("confirmation").innerHTML = "Notify the customer, they will recieve an email with confirmation number";
+
 	} else {
 		document.getElementById("finalPrice").innerHTML = "Choose Order Type/ Method"
 	}
@@ -108,7 +109,7 @@ function setOrderPayMethod() {
 			orderMethod = orderMethod[i].value
 			document.getElementById("orderMethod").innerHTML = "Order Type: " + orderMethod;
 			return true;
-		} 
+		}
 	}
 }
 

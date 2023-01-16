@@ -58,9 +58,7 @@
 												<input th:text="${topping.name}" class="toppingName"
 													type="checkbox" th:value="${topping.name}">
 											</form>
-										</div>
-										
-										<span id="emptyTopping">error message</span>
+										</div> <span id="emptyTopping">error message</span>
 
 									</td>
 									<td><select class="form_control"
@@ -105,13 +103,13 @@
 			<th>Comment</th>
 			<th>price</th>
 		</tr>
-		
+
 		<tr th:each="pizza : ${pizzas}">
 			<td>[[${pizza.pizzaId}]]</td>
 			<td>x[[${pizza.qty}]]</td>
 			<td>[[${pizza.size}]]</td>
 			<td>[[${pizza.toppings}]]</td>
-<!-- 			<td id="emptyTopping"></td> -->
+			<!-- 			<td id="emptyTopping"></td> -->
 			<td>[[${pizza.HowCooked}]]</td>
 			<td>[[${pizza.comment}]]</td>
 			<td class="priceList">[[${pizza.price}]]</td>
@@ -133,24 +131,28 @@
 
 	<hr>
 	<div>
-		Order Method: <input  type="radio" class="orderMethod"
+		Order Method: <input type="radio" class="orderMethod"
 			name="orderMethod" value="Cash">Cash <input type="radio"
 			class="orderMethod" name="orderMethod" value="Visa">Visa
 
 	</div>
 	<span id="orderMethod"></span>
 	<br>
-	
+
 	<div>
 		Order Type: <input type="radio" class="orderType" name="orderType"
-			value="PickUp" >PickUp <input   type="radio" class="orderType"
+			value="PickUp">PickUp <input type="radio" class="orderType"
 			name="orderType" value="Delivery">Delivery
 	</div>
 	<span id="orderType"></span>
-	<br>	
+	<br>
 	<div class="action_container">
-		<button class="danger" id="settleBtn" type="Submit">Settle</button>	<span id="finalPrice"></span>
-		
+		<button class="danger" id="settleBtn" type="Submit">Settle</button>
+		<span id="finalPrice"></span>
+	</div>
+
+	<div class="action_container">
+		<span id="confirmation"></span>
 	</div>
 	<hr>
 	<br>
