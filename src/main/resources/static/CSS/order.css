@@ -1,13 +1,37 @@
 @import
 	url('https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap')
 	;
-
 * {
-	box-sizing: border-box;
-	padding: 0;
-	margin: 0;
-	font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
+
+/* Create three equal columns that floats next to each other */
+.columnMiddle {
+  float: left;
+  width: 50%;
+  padding: 10px;
+/*   height: 300px; Should be removed. Only for demonstration */
+}
+.columnSide {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  height: 900px; 
+  
+}
+
+
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+
+
 
 body {
 	background-color: #efefef;
@@ -30,7 +54,7 @@ body {
 	padding: 8px 10px
 }
 
-/*form field design start*/
+/*form field design start */
 .form_control {
 	border: 1px solid #0002;
 	background-color: transparent;
@@ -46,7 +70,7 @@ body {
 .form_control:is(:focus, :hover) {
 	box-shadow: inset 0 1px 6px #0002;
 }
-/*form field design end*/
+/*form field design end */
 .success {
 	background-color: #24b96f !important;
 }
@@ -106,13 +130,14 @@ table {
 }
 
 td, th {
-	border: 1px solid #dddddd;
+	border: 1px solid rgb(255, 255, 255);
 	text-align: left;
 	padding: 8px;
+	background-color: white;
 }
 
 tr:nth-child(even) {
-	background-color: #dddddd;
+	background-color: rgb(255, 255, 255);
 }
 
 

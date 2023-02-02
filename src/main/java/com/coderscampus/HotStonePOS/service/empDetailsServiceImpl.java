@@ -21,13 +21,7 @@ public class empDetailsServiceImpl implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String empUsername) throws UsernameNotFoundException {
-		Employee emp = empRepo.findByUsername(empUsername);
-//		System.out.println("LOGGEDIN USER: " + emp.getUsername());
-//		System.out.println(emp.getPassword());
-		
-		if (emp == null)
-			throw new UsernameNotFoundException("Username or password was incorrect");
-		
+		Employee emp = empRepo.findByUsername(empUsername);		
 		return new CustomSecurityEmp(emp); // map emp => empDetail
 	}
 

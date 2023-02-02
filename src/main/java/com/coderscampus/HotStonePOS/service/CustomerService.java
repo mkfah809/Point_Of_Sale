@@ -32,12 +32,13 @@ public class CustomerService {
 	}
 
 	public Customer findById(Long id) {
-		Optional<Customer> optional = custRepo.findById(id);
+		Optional<Customer> foundCustomer = custRepo.findById(id);
 		Customer cust = null;
-		if (optional.isPresent())
-			cust = optional.get();
-		else
-			throw new RuntimeException("cust not found for id : " + id);
+		if (foundCustomer.isPresent()) {
+			cust = foundCustomer.get();
+		} else {
+			
+		}
 		return cust;
 
 	}
@@ -70,8 +71,8 @@ public class CustomerService {
 	public void sendMail(Customer customer, Order order) {
 		final String emailToRecipient = customer.getEmail();
 		final String emailSubject = "Thank you for Choosing XYZ Pizzeria";
-		final String emailMessage = "Thank you for Choosing HotStone POS" + "\r\n Your Total is: " + order.getFinalPrice()
-				+ "\r\n Your confirmation# is: " + order.getConfirmationNumber();
+		final String emailMessage = "Thank you for Choosing HotStone POS" + "\r\n Your Total is: "
+				+ order.getFinalPrice() + "\r\n Your confirmation# is: " + order.getConfirmationNumber();
 		mailSender.send(new MimeMessagePreparator() {
 
 			@Override

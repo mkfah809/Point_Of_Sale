@@ -13,10 +13,10 @@
 			<input type=hidden id="csrf" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 			<div class="txt_field">
-				name: <input type="text" th:field="${topping.name}" />
+				<input required placeholder="Topping Name" type="text" th:field="${topping.name}" />
 			</div>
 			<div class="txt_field">
-				price: <input type="text" th:field="${topping.price}" />
+			 <input required placeholder="Topping Price" type="text" th:field="${topping.price}" />
 			</div>
 			<div>
 				<button type="submit" class="btn">Update</button>

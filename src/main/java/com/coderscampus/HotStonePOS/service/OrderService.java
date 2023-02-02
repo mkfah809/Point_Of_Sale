@@ -27,7 +27,6 @@ public class OrderService {
 	@Autowired
 	empDetailsServiceImpl empService;
 
-	private static final DecimalFormat df = new DecimalFormat("0.00");
 
 	public void delete(Long orderId) {
 		orderRepo.deleteById(orderId);
@@ -82,5 +81,13 @@ public class OrderService {
 	public List<Order> findAll() {
 		return orderRepo.findAll();
 	}
+	
+	public void setOrderDetails(Order order, Order foundOrder, String confirmationNumber) {
+		foundOrder.setConfirmationNumber(confirmationNumber);
+		foundOrder.setFinalPrice(order.getFinalPrice());
+		foundOrder.setOrderMethod(order.getOrderMethod());
+		foundOrder.setType(order.getType());
+	}
+
 
 }

@@ -1,3 +1,1 @@
-var next = document.getElementById('nextBtn');
-
-next.focus()
+document.getElementById("searhBtn").focus();

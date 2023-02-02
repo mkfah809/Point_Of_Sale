@@ -29,7 +29,7 @@ public class Order {
 	private Customer cust;
 	private String confirmationNumber;
 	private List<Pizza> pizzas = new ArrayList<>();
-	
+
 	public String getConfirmationNumber() {
 		return confirmationNumber;
 	}

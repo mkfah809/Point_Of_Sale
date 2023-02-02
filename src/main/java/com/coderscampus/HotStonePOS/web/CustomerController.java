@@ -29,7 +29,7 @@ public class CustomerController {
 	@GetMapping("/customer/information/new")
 	public String getCustomer(ModelMap model) {
 		model.put("customer", new Customer());
-		return "searchCustomer";
+		return "customer";
 	}
 
 	@PostMapping("/customer/information/new")
@@ -40,7 +40,6 @@ public class CustomerController {
 
 			foundCustomer = custService.save(cust);
 		}
-
 		return "redirect:/customer/information/" + foundCustomer.getCustId();
 	}
 

@@ -4,16 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/css/customer.css">
-
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
-	<div class="center">
-		<h1>Customer Information</h1>
 
-		<form class="form" id="form"
+	<div class="top-center">
+		<form method="POST" action="/customer/information/new">
+			<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
+				th:value="${_csrf.token}" /> <input th:field="${customer.phone}" class="rounded" required type="text" id="searchPhone"
+				placeholder="Enter Phone Number .." name="search"><button type="submit"><i id="searhBtn" class="fa fa-search"></i></button>
+		</form>
+	</div>
+
+
+	<div class="center">
+		<form th:if="${customer.custId} != null" class="form" id="form"
 			th:action="@{/customer/information/{custId}(custId=${customer.custId})}"
 			method="POST">
+			<h1>Customer Information</h1>
 			<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
 				th:value="${_csrf.token}" />
 
@@ -22,15 +32,15 @@
 					th:field="${customer.custId}">
 			</div>
 			<div class="txt_field">
-				 <input placeholder="Name*" required class="rounded" type="text"
+				<input placeholder="Name*" required class="rounded" type="text"
 					id="name" th:field="${customer.name}">
 			</div>
 			<div class="txt_field">
-				 <input required class="rounded" type="text"
-					id="phone" th:field="${customer.phone}">
+				<input  class="rounded" type="text" id="phone"
+					th:field="${customer.phone}">
 			</div>
 			<div class="txt_field">
-				 <input placeholder="Email*" required class="rounded" type="text"
+				<input placeholder="Email*" required class="rounded" type="email"
 					id="email" th:field="${customer.email}">
 			</div>
 
@@ -39,24 +49,22 @@
 					id="addressLine1" th:field="${customer.address.addressLine1}" />
 			</div>
 			<div class="txt_field">
-				 <input placeholder="Apt.,Building ... *"class="rounded" type="text" id="addressLine2"
-					th:field="${customer.address.addressLine2}" />
+				<input placeholder="Apt.,Building ... *" class="rounded" type="text"
+					id="addressLine2" th:field="${customer.address.addressLine2}" />
 			</div>
 			<div class="txt_field">
-			 <input required placeholder="City*"class="rounded" type="text" id="city"
-					th:field="${customer.address.city}" />
+				<input required placeholder="City*" class="rounded" type="text"
+					id="city" th:field="${customer.address.city}" />
 			</div>
 
 			<div class="txt_field">
-			 <input placeholder="Zipcode*" required class="rounded" type="text" id="zipCode"
-					th:field="${customer.address.zipCode}" />
+				<input placeholder="Zipcode*" required class="rounded" type="text"
+					id="zipCode" th:field="${customer.address.zipCode}" />
 			</div>
 			<div class="btn">
-				<button id="nextBtn" value="submit" type="submit">
-					<i class="fas fa-search">Next</i>
-				</button>
+				<button id="nextBtn" value="submit" type="submit">Order
+					Here</button>
 			</div>
-
 		</form>
 	</div>
 

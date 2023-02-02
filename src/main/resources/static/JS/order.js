@@ -3,7 +3,7 @@ var settleBtn = document.getElementById('settleBtn')
 var orderType = document.getElementsByName('orderType')
 var orderMethod = document.getElementsByName('orderMethod')
 
-var orderId = document.getElementById('orderById')
+var orderId = document.getElementById('orderId')
 var pizzaSize = document.getElementById('size')
 var pizzaQty = document.getElementById('qty')
 var howCook = document.getElementById('howCook')
@@ -38,7 +38,7 @@ pizzaAddBtn.focus()
 pizzaAddBtn.addEventListener("click", () => {
 
 	sessionStorage.clear('toppings')
-
+	refresh()
 	if (pizzaSize.value === "Lg") {
 		pizzaSizePrice = 11.99
 	} else {
