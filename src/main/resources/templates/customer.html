@@ -13,8 +13,12 @@
 	<div class="top-center">
 		<form method="POST" action="/customer/information/new">
 			<input type="hidden" id="csrf" th:name="${_csrf.parameterName}"
-				th:value="${_csrf.token}" /> <input th:field="${customer.phone}" class="rounded" required type="text" id="searchPhone"
-				placeholder="Enter Phone Number .." name="search"><button type="submit"><i id="searhBtn" class="fa fa-search"></i></button>
+				th:value="${_csrf.token}" /> <input th:field="${customer.phone}"
+				class="rounded" required type="text" id="searchPhone"
+				placeholder="Enter Phone Number .." name="search">
+			<button type="submit">
+				<i id="searhBtn" class="fa fa-search"></i>
+			</button>
 		</form>
 	</div>
 
@@ -36,7 +40,7 @@
 					id="name" th:field="${customer.name}">
 			</div>
 			<div class="txt_field">
-				<input  class="rounded" type="text" id="phone"
+				<input class="rounded" type="text" id="phone"
 					th:field="${customer.phone}">
 			</div>
 			<div class="txt_field">

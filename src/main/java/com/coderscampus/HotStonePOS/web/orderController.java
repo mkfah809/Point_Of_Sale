@@ -60,12 +60,13 @@ public class orderController {
 			model.put("pizzas", pizzas);
 			model.put("toppings", toppingService.findAllToppings());
 		}
-		 
+
 		if (order.getConfirmationNumber() != null) {
-			return "redirect:/customer/information/new";
+			return "redirect:/charge/order/" + order.getOrderId();
 		}
 		if (!pizza.getToppings().isEmpty()) {
-			Double finalPizzaPrice = pizza.getPrice() + (toppingService.getToppingPricePerPizza(pizza) * pizza.getQty());
+			Double finalPizzaPrice = pizza.getPrice()
+					+ (toppingService.getToppingPricePerPizza(pizza) * pizza.getQty());
 			pizza.setPrice(finalPizzaPrice);
 		}
 
@@ -114,13 +115,10 @@ public class orderController {
 	String postFinalPrice(@RequestBody Order order) {
 		Order foundOrder = orderService.findById(order.getOrderId());
 		String confirmationNumber = custService.getConfirmationNumber();
-		orderService.setOrderDetails(order, foundOrder, confirmationNumber);
-		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());	
-		custService.sendMail(foundOrder.getCust(), foundOrder);
+		orderService.setFinalPrice(order, foundOrder, confirmationNumber);
+		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());
+//		custService.sendMail(foundOrder.getCust(), foundOrder);
 		return "redirect:/customer/"+foundOrder.getCust().getCustId()+"/order/"+foundOrder.getOrderId();
 	}
-	
-	
 
-	
 }

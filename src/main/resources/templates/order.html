@@ -131,7 +131,7 @@
 			<div class="container">
 				<table class="_table">
 					<tr>
-						<td><input type="radio" class="orderMethod"
+						<td><input checked type="radio" class="orderMethod"
 							name="orderMethod" value="Cash">Cash <input type="radio"
 							class="orderMethod" name="orderMethod" value="Visa">Visa</td>
 
@@ -139,7 +139,7 @@
 
 
 					<tr>
-						<td><input type="radio" class="orderType" name="orderType"
+						<td><input checked type="radio" class="orderType" name="orderType"
 							value="PickUp">PickUp <input type="radio"
 							class="orderType" name="orderType" value="Delivery">Delivery
 						</td>
@@ -148,11 +148,12 @@
 
 					<tr>
 						<td class="action_container">
-							<button class="success"  type="Submit">Checkout</button>
+						
+							<button class="success" id="settleBtn" type="Submit">Checkout</button>
 							
 							<span id="finalPrice"></span> 
 							
-							<a class="action_container" href='/customer/information/new'>
+							<a  href='/customer/information/new'>
 								<button class="danger">Cancel</button>
 							</a>
 

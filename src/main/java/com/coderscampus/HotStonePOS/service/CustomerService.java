@@ -70,9 +70,9 @@ public class CustomerService {
 
 	public void sendMail(Customer customer, Order order) {
 		final String emailToRecipient = customer.getEmail();
-		final String emailSubject = "Thank you for Choosing XYZ Pizzeria";
-		final String emailMessage = "Thank you for Choosing HotStone POS" + "\r\n Your Total is: "
-				+ order.getFinalPrice() + "\r\n Your confirmation# is: " + order.getConfirmationNumber();
+		final String emailSubject = "Thank you for Choosing Rotary Pizza";
+		final String emailMessage = "\r\n Your Total is: "
+				+ order.getFinalPrice() + "\r\n Your Random confirmation# is: " + order.getConfirmationNumber();
 		mailSender.send(new MimeMessagePreparator() {
 
 			@Override

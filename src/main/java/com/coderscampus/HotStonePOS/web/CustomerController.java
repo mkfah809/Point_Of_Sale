@@ -53,7 +53,7 @@ public class CustomerController {
 	}
 
 	@PostMapping("/customer/information/{custId}")
-	String updateExistingCustomer(Customer cust, ModelMap model) {
+	String updateExistingCustomer(@AuthenticationPrincipal Employee emp,Customer cust, ModelMap model) {
 		System.out.println("Updating Customer# " + cust.getCustId());
 		custService.setAddressToCustomer(cust, new Address());
 		custService.save(cust);

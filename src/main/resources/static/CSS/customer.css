@@ -9,7 +9,7 @@ body {
 
 .center {
 	position: absolute;
-	top: 50%;
+	top: 55%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 400px;
@@ -24,7 +24,8 @@ body {
 }
 
 .center form {
-	padding: 0 40px;
+	padding: 0px 40px;
+	
 	box-sizing: border-box;
 }
 
@@ -101,8 +102,8 @@ form .txt_field {
 }
 
 .top-center input {
-	margin-top: 80px;
-	margin-left: 670px;
+/* 	margin-top: 80px; */
+	margin-left: 550px;
 	margin-right: 10px;
 	height: 45px;
 	width: 30%;

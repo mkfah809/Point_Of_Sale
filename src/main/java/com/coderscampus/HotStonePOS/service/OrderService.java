@@ -82,7 +82,7 @@ public class OrderService {
 		return orderRepo.findAll();
 	}
 	
-	public void setOrderDetails(Order order, Order foundOrder, String confirmationNumber) {
+	public void setFinalPrice(Order order, Order foundOrder, String confirmationNumber) {
 		foundOrder.setConfirmationNumber(confirmationNumber);
 		foundOrder.setFinalPrice(order.getFinalPrice());
 		foundOrder.setOrderMethod(order.getOrderMethod());

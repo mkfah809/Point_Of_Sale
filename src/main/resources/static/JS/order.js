@@ -70,13 +70,13 @@ settleBtn.addEventListener('click', () => {
 
 	if (orderMethodisChecked == true & orderTypeIsChecked == true) {
 		postUpdateOrder()
-		document.getElementById("finalPrice").innerHTML = "Total Price: " + 0.0;
-		document.getElementById("confirmation").innerHTML = "Notify the customer, they will recieve an email with confirmation number";
+		//		document.getElementById("finalPrice").innerHTML = "Total Price: " + 0.0;
+		//		document.getElementById("confirmation").innerHTML = "Notify the customer, they will recieve an email with confirmation number";
 
 	} else {
 		document.getElementById("finalPrice").innerHTML = "Choose Order Type/ Method"
 	}
-
+	refresh()
 
 })
 
