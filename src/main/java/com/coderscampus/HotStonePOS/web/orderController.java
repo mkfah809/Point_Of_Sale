@@ -117,8 +117,13 @@ public class orderController {
 		String confirmationNumber = custService.getConfirmationNumber();
 		orderService.setFinalPrice(order, foundOrder, confirmationNumber);
 		orderService.save(foundOrder, foundOrder.getEmp(), foundOrder.getCust(), new ArrayList<Order>());
-//		custService.sendMail(foundOrder.getCust(), foundOrder);
+		custService.sendMail(foundOrder.getCust(), foundOrder);
 		return "redirect:/customer/"+foundOrder.getCust().getCustId()+"/order/"+foundOrder.getOrderId();
 	}
+	
+	
+	
+	
+	
 
 }

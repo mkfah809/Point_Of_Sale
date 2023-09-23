@@ -24,9 +24,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encode = passwordEncoder.encode("00");
-		System.out.println("Paste this in the Db: " + encode);
 		
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
 

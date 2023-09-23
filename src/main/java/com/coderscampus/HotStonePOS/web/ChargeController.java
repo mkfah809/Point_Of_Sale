@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coderscampus.HotStonePOS.domain.Order;
+import com.coderscampus.HotStonePOS.dto.ChargeResponse;
 import com.coderscampus.HotStonePOS.service.ChargeService;
 import com.coderscampus.HotStonePOS.service.OrderService;
-import com.renovationhome.fixitright.dto.ChargeResponse;
 import com.stripe.model.Coupon;
 @Controller
 public class ChargeController {

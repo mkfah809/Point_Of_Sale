@@ -1,4 +1,4 @@
-package com.renovationhome.fixitright.dto;
+package com.coderscampus.HotStonePOS.dto;
 
 public class ChargeResponse {
 	
